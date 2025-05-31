@@ -1,0 +1,787 @@
+.laporan-search-input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 24px 0 32px 0;
+  position: relative;
+  max-width: 400px;
+}
+
+.laporan-search-icon-inside {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+.laporan-search-input {
+  padding: 10px 14px 10px 38px;
+  border: 1px solid #303030;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.laporan-btn-search-action {
+  font-family: "Poppins", sans-serif;
+  background: var(--primary-blue, #27548a);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(39, 84, 138, 0.08);
+}
+
+.laporan-btn-search-action:hover {
+  background: #18365a;
+}
+
+@media (max-width: 700px) {
+  .laporan-search-input-container {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+  }
+}
+
+.laporan-absensi-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: "Poppins", sans-serif;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.laporan-absensi-table th {
+  background: var(--primary-blue, #27548a);
+  color: #fff;
+  padding: 14px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.laporan-absensi-table td {
+  padding: 12px 18px;
+  font-size: 1rem;
+  color: #303030;
+  background: #fff;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.laporan-absensi-table tr.row-genap td {
+  background: #e2e2e2;
+}
+
+/* Pagination & Export untuk laporan absensi versi desktop/mobile */
+
+.laporan-absensi-table-footer-container-mobile {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.laporan-absensi-pagination-nav-mobile {
+  display: flex;
+}
+
+.laporan-absensi-btn-page-mobile {
+  background: #fff;
+  color: var(--primary-blue, #27548a);
+  border: 1.5px solid var(--primary-blue, #27548a);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-right: 6px;
+}
+
+.laporan-absensi-btn-page-mobile.active,
+.laporan-absensi-btn-page-mobile:hover {
+  background: var(--primary-blue, #27548a);
+  color: #fff;
+}
+
+.laporan-absensi-btn-page-mobile:last-child {
+  margin-right: 0;
+}
+
+.laporan-absensi-export-nav-mobile {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.laporan-absensi-btn-export-mobile {
+  background: var(--success-green, #3bb77e);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  justify-content: flex-end;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(39, 84, 138, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.laporan-absensi-btn-export-mobile img {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.laporan-absensi-btn-export-mobile:hover {
+  background: #2e8f5a;
+  color: #fff;
+}
+
+/* Desktop: sejajar */
+.laporan-absensi-table-footer-container-mobile {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Mobile/tablet: 2 baris */
+@media (max-width: 700px) {
+  .laporan-absensi-table-footer-container-mobile {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .laporan-absensi-pagination-nav-mobile,
+  .laporan-absensi-export-nav-mobile {
+    width: 100%;
+    justify-content: center;
+    margin: 0;
+  }
+}
+
+.absensi-table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 2rem;
+}
+
+.absensi-table {
+  width: 100%;
+  max-width: 900px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: "Poppins", sans-serif;
+  min-width: 350px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(39, 84, 138, 0.06);
+}
+
+.absensi-table th {
+  background: var(--primary-blue);
+  color: #fff;
+  padding: 12px 18px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-align: left;
+}
+.absensi-table th:first-child {
+  border-top-left-radius: 8px;
+}
+.absensi-table th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.absensi-table td {
+  padding: 10px 18px;
+  font-size: 0.98rem;
+  color: #303030;
+  background: #f9f9f9;
+}
+
+.absensi-table tr:nth-child(even) td {
+  background: #f1f1f1;
+}
+
+.absensi-btn-aksi,
+.absensi-btn-detail {
+  background: var(--primary-blue);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
+
+.btn-detail:hover {
+  background-color: var(--accent-yellow);
+}
+
+.absensi-btn-detail img {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.absensi-btn-aksi:hover,
+.absensi-btn-detail:hover {
+  background: var(--accent-yellow);
+}
+
+.btn-absensi-pertemuan {
+  background: var(--accent-yellow, #ffd803);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(255, 216, 3, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-absensi-pertemuan img {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.btn-absensi-pertemuan:hover {
+  background: #e6c200;
+  color: white;
+}
+
+.btn-tambah-pertemuan {
+  background: var(--primary-blue, #27548a);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(39, 84, 138, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-tambah-pertemuan img {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.btn-tambah-pertemuan:hover {
+  background: #1e4370;
+  color: #fff;
+}
+
+.absensi-container {
+  margin-top: 2rem;
+  display: flex;
+  max-width: 900px;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .absensi-container {
+    flex-wrap: nowrap;
+  }
+
+  .btn-absensi-pertemuan {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .btn-absensi-pertemuan,
+  .btn-tambah-pertemuan {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.laporan-absensi-table-mobile {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.laporan-absensi-table-mobile .title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.laporan-absensi-table-mobile table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden; /* Agar border-radius berlaku */
+}
+
+.laporan-absensi-table-mobile thead {
+  background-color: #27548a;
+  color: #fff;
+}
+
+.laporan-absensi-table-mobile th {
+  padding: 12px;
+  text-align: left;
+}
+
+.laporan-absensi-table-mobile tbody tr:nth-child(even) {
+  background-color: #e2e2e2;
+}
+
+.laporan-absensi-table-mobile td {
+  padding: 10px;
+  text-align: left;
+}
+
+/* Border-radius untuk bagian atas (thead) */
+.laporan-absensi-table-mobile thead tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+.laporan-absensi-table-mobile thead tr:first-child th:last-child {
+  border-top-right-radius: 10px;
+}
+
+/* Border-radius untuk bagian bawah (tbody) */
+.laporan-absensi-table-mobile tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+.laporan-absensi-table-mobile tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+.btn-aksi {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn-detail {
+  background: var(--primary-blue);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-detail img {
+  width: 20px;
+  height: 20px;
+}
+
+/* ===== TABLE FOOTER & PAGINATION ===== */
+.laporan-absensi-table-footer-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.laporan-absensi-pagination-nav {
+  display: flex;
+}
+
+.laporan-absensi-btn-page {
+  background: #fff;
+  color: var(--primary-blue);
+  border: 1.5px solid var(--primary-blue);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-right: 6px;
+}
+
+.laporan-absensi-btn-page.active,
+.laporan-absensi-btn-page:hover {
+  background: var(--primary-blue);
+  color: #fff;
+}
+
+.laporan-absensi-btn-page:last-child {
+  margin-right: 0;
+}
+
+/* ===== EXPORT BUTTON ===== */
+.laporan-absensi-export-nav .laporan-absensi-btn-export {
+  background: var(--success-green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(255, 216, 3, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.laporan-absensi-btn-export img {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.laporan-absensi-btn-export:hover {
+  background: #2e8f5a;
+  color: #fff;
+}
+
+/* ===== SEARCH INPUT ===== */
+.laporan-absensi-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.laporan-absensi-search-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.laporan-absensi-search-icon-inside {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.laporan-absensi-search-input {
+  padding: 10px 14px 10px 38px;
+  border: 1px solid #303030;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  background: #fff;
+  color: #222;
+  width: 16rem;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(39, 84, 138, 0.08);
+  max-width: 450px;
+}
+
+.laporan-absensi-search-input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 2px 12px rgba(39, 84, 138, 0.15);
+}
+
+@media (max-width: 700px) {
+  .laporan-absensi-search-input {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+  .laporan-absensi-search-input-container {
+    width: 100%;
+  }
+}
+
+/* ===== SEARCH BUTTON ===== */
+.laporan-absensi-btn-search-action {
+  font-family: "Poppins", sans-serif;
+  background: var(--primary-blue, #27548a);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(39, 84, 138, 0.08);
+}
+
+.laporan-absensi-btn-search-action:hover {
+  background: #18365a;
+}
+
+.laporan-absensi-search-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.laporan-absensi-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.laporan-absensi-search-input {
+  flex: 1;
+  padding: 8px;
+  border: 2px solid #27548a;
+  border-radius: 5px;
+}
+
+.laporan-absensi-btn-action {
+  background-color: #27548a;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.laporan-absensi-btn-action:hover {
+  background-color: #1f4172;
+}
+
+.laporan-absensi-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.laporan-absensi-buttons button {
+  font-family: "Poppins", sans-serif;
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.laporan-absensi-btn-bulan {
+  background-color: #2e8f5a;
+  color: white;
+}
+
+.laporan-absensi-btn-semester {
+  background-color: #d9534f;
+  color: white;
+}
+
+.laporan-absensi-btn-all {
+  background-color: #f0ad4e;
+  color: white;
+}
+
+.laporan-absensi-btn-export {
+  background-color: #0275d8;
+  color: white;
+}
+
+.laporan-absensi-buttons button:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .laporan-absensi-buttons {
+    flex-wrap: wrap;
+  }
+
+  .laporan-absensi-buttons button {
+    width: 50%;
+  }
+}
+
+.laporan-absensi-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.laporan-absensi-buttons button {
+  background: transparent;
+  color: var(--accent-yellow);
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(255, 216, 3, 0.08);
+  border: 2px solid var(--accent-yellow);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  min-width: 150px;
+}
+
+/* Efek hover */
+.laporan-absensi-buttons button:hover {
+  background: #218838; /* Lebih gelap saat hover */
+}
+
+/* Responsif: Tombol turun ke bawah di mode mobile */
+@media (max-width: 768px) {
+  .laporan-absensi-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .laporan-absensi-buttons button {
+    width: 50%;
+    max-width: 200px;
+  }
+}
+
+.laporan-absensi-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.laporan-absensi-buttons button {
+  background: var(--primary-blue);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(255, 216, 3, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  min-width: 150px;
+}
+
+/* Efek hover */
+.laporan-absensi-buttons button:hover {
+  background: var(--accent-yellow); /* Warna lebih gelap saat hover */
+}
+
+/* Responsif: Tombol dibagi 2 per baris di mode mobile */
+@media (max-width: 768px) {
+  .laporan-absensi-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .laporan-absensi-buttons button {
+    width: 100%;
+  }
+}
+
+.laporan-absensi-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.laporan-absensi-btn {
+  background: transparent;
+  color: var(--accent-yellow);
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(255, 216, 3, 0.08);
+  border: 2px solid var(--accent-yellow);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Efek hover */
+.laporan-absensi-btn:hover {
+  background: var(--accent-yellow);
+  color: white;
+}
+
+/* Indikator tombol yang aktif */
+.laporan-absensi-btn.active {
+  background: var(
+    --accent-yellow
+  ); /* Warna kuning terang sebagai indikator aktif */
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 216, 3, 0.3);
+}
+
+/* Responsif: Tombol dibagi 2 per baris di mode mobile */
+@media (max-width: 768px) {
+  .laporan-absensi-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .laporan-absensi-btn {
+    width: 100%;
+  }
+}

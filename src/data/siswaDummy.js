@@ -1,0 +1,17 @@
+export const siswaDummy = [
+  { id: 1, nama: "Sopiyan Rasuna", ekskul: "Basket", kelas: "7A", alamat: "Jl. Contoh No. 123", nohp: "08123456789" },
+  { id: 2, nama: "Dewi Lestari", ekskul: "Futsal", kelas: "8B", alamat: "Jl. Mawar No. 45", nohp: "08129876543" },
+  { id: 3, nama: "Rizky Maulana", ekskul: "Pramuka", kelas: "9C", alamat: "Jl. Melati No. 8", nohp: "08121234567" },
+  { id: 4, nama: "Ayu Wulandari", ekskul: "Paskibra", kelas: "8A", alamat: "Jl. Kenanga No. 77", nohp: "08123456780" },
+  { id: 5, nama: "Budi Santoso", ekskul: "Voli", kelas: "7B", alamat: "Jl. Anggrek No. 12", nohp: "08123456781" },
+  { id: 6, nama: "Citra Dewi", ekskul: "Basket", kelas: "9A", alamat: "Jl. Dahlia No. 21", nohp: "08123456782" },
+  { id: 7, nama: "Dian Pratama", ekskul: "Futsal", kelas: "8C", alamat: "Jl. Flamboyan No. 33", nohp: "08123456783" },
+  { id: 8, nama: "Eka Saputra", ekskul: "Pramuka", kelas: "7C", alamat: "Jl. Cempaka No. 55", nohp: "08123456784" },
+  { id: 9, nama: "Fajar Nugraha", ekskul: "Paskibra", kelas: "9B", alamat: "Jl. Sawo No. 66", nohp: "08123456785" },
+  { id: 10, nama: "Gita Permata", ekskul: "Voli", kelas: "8B", alamat: "Jl. Mangga No. 99", nohp: "08123456786" },
+  { id: 11, nama: "Hendra Gunawan", ekskul: "Basket", kelas: "7A", alamat: "Jl. Rambutan No. 101", nohp: "08123456787" },
+  { id: 12, nama: "Indah Sari", ekskul: "Futsal", kelas: "8A", alamat: "Jl. Durian No. 202", nohp: "08123456788" },
+  { id: 13, nama: "Joko Susilo", ekskul: "Pramuka", kelas: "9C", alamat: "Jl. Pisang No. 303", nohp: "08123456789" },
+  { id: 14, nama: "Kiki Amelia", ekskul: "Paskibra", kelas: "7B", alamat: "Jl. Apel No. 404", nohp: "08123456790" },
+  { id: 15, nama: "Lina Marlina", ekskul: "Voli", kelas: "9A", alamat: "Jl. Pepaya No. 505", nohp: "08123456791" },
+];

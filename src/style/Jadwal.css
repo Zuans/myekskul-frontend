@@ -1,0 +1,171 @@
+.jadwal-table-desktop {
+  display: block;
+}
+.jadwal-table-mobile-wrapper {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .jadwal-table-desktop {
+    display: none;
+  }
+  .jadwal-table-mobile-wrapper {
+    display: block;
+  }
+}
+
+/* Jadwal Table Desktop */
+.jadwal-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: "Poppins", sans-serif;
+  min-width: 700px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.jadwal-table th {
+  background: var(--primary-blue);
+  color: #fff;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+}
+.jadwal-table th:first-child {
+  border-top-left-radius: 10px;
+}
+.jadwal-table th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.jadwal-table td {
+  padding: 12px 28px;
+  font-size: 1rem;
+  color: #303030;
+}
+
+.jadwal-table tr:nth-child(odd) td {
+  background: #fff;
+}
+.jadwal-table tr:nth-child(even) td {
+  background: #e2e2e2;
+}
+
+.jadwal-table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+.jadwal-table tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+/* Jadwal Table Mobile */
+.jadwal-table-mobile {
+  margin-top: 2rem;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: "Poppins", sans-serif;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+.jadwal-table-mobile th {
+  background: var(--primary-blue);
+  color: #fff;
+  padding: 14px 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+}
+.jadwal-table-mobile td {
+  padding: 12px 10px;
+  font-size: 1rem;
+  color: #303030;
+  background: #fff;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+/* Responsive Table Wrapper */
+.jadwal-table-desktop {
+  display: block;
+}
+.jadwal-table-mobile-wrapper {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .jadwal-table-desktop {
+    display: none;
+  }
+  .jadwal-table-mobile-wrapper {
+    display: block;
+  }
+}
+
+.dashboard-siswa-jadwal-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: left;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.dashboard-siswa-jadwal-table th,
+.dashboard-siswa-jadwal-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.dashboard-siswa-jadwal-table th {
+  background-color: var(--primary-blue);
+  color: white;
+  font-weight: bold;
+}
+
+.dashboard-siswa-jadwal-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.dashboard-siswa-jadwal-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.dashboard-siswa-jadwal-table td {
+  color: #333;
+}
+
+.dashboard-siswa-riwayat-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: left;
+}
+
+.dashboard-siswa-riwayat-table th,
+.dashboard-siswa-riwayat-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.dashboard-siswa-riwayat-table th {
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+}
+
+.dashboard-siswa-riwayat-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.dashboard-siswa-riwayat-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.dashboard-siswa-riwayat-table td {
+  color: #333;
+}

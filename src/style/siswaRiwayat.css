@@ -1,0 +1,269 @@
+.dashboard-siswa-riwayat-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: left;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.dashboard-siswa-riwayat-table th,
+.dashboard-siswa-riwayat-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.dashboard-siswa-riwayat-table th {
+  background-color: var(--primary-blue);
+  color: white;
+  font-weight: bold;
+}
+
+.dashboard-siswa-riwayat-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.dashboard-siswa-riwayat-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.dashboard-siswa-riwayat-table td {
+  color: #333;
+}
+
+.riwayat-absensi-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.riwayat-absensi-search-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.riwayat-absensi-search-icon-inside {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.riwayat-absensi-search-input {
+  padding: 10px 14px 10px 38px;
+  border: 1px solid #303030;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  background: #fff;
+  color: #222;
+  width: 16rem;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(39, 84, 138, 0.08);
+}
+
+.riwayat-absensi-search-input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 2px 12px rgba(39, 84, 138, 0.15);
+}
+
+@media (max-width: 700px) {
+  .riwayat-absensi-search-input {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+  .riwayat-absensi-search-input-container {
+    width: 100%;
+  }
+}
+
+/* ===== TABLE FOOTER & PAGINATION ===== */
+.riwayat-table-footer-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.riwayat-pagination-nav {
+  display: flex;
+}
+
+.riwayat-btn-page {
+  background: #fff;
+  color: var(--primary-blue);
+  border: 1.5px solid var(--primary-blue);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-right: 6px;
+}
+
+.riwayat-btn-page.active,
+.riwayat-btn-page:hover {
+  background: var(--primary-blue);
+  color: #fff;
+}
+
+.riwayat-btn-page:last-child {
+  margin-right: 0;
+}
+
+/* ===== EXPORT BUTTON ===== */
+.riwayat-export-nav .riwayat-btn-export {
+  background: var(--success-green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(255, 216, 3, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.riwayat-btn-export img {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.riwayat-btn-export:hover {
+  background: #2e8f5a;
+  color: #fff;
+}
+
+/* ===== RESPONSIVE TABLE FOOTER ===== */
+@media (max-width: 700px) {
+  .riwayat-table-footer-container {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .riwayat-export-nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .riwayat-pagination-nav {
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* ===== TABLE FOOTER & PAGINATION ===== */
+.riwayat-table-footer-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.riwayat-pagination-nav {
+  display: flex;
+}
+
+.riwayat-btn-page {
+  background: #fff;
+  color: var(--primary-blue);
+  border: 1.5px solid var(--primary-blue);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-right: 6px;
+}
+
+.riwayat-btn-page.active,
+.riwayat-btn-page:hover {
+  background: var(--primary-blue);
+  color: #fff;
+}
+
+.riwayat-btn-page:last-child {
+  margin-right: 0;
+}
+
+/* ===== EXPORT BUTTON ===== */
+.riwayat-export-nav .riwayat-btn-export {
+  background: var(--success-green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(255, 216, 3, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.riwayat-btn-export img {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.riwayat-btn-export:hover {
+  background: #2e8f5a;
+  color: #fff;
+}
+
+/* ===== RESPONSIVE TABLE FOOTER ===== */
+@media (max-width: 700px) {
+  .riwayat-table-footer-container {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .riwayat-export-nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .riwayat-pagination-nav {
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}

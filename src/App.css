@@ -1,0 +1,48 @@
+/* App.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-blue: #27548a;
+  --accent-yellow: #dda853;
+  --dark-blue: #183b4e;
+  --danger-red: #ff4d4d;
+  --success-green: #217346;
+}
+
+/* Contoh penggunaan */
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  background: var(--dark-blue);
+  color: var(--primary-blue);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+}
+
+a {
+  text-decoration: none;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 900px) {
+  .title {
+    text-align: center;
+  }
+}

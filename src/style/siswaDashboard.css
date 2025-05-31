@@ -1,0 +1,295 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.dashboard-siswa-card-title,
+.dashboard-siswa-title {
+  font-family: "Poppins", sans-serif;
+}
+
+.dashboard-siswa-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-siswa-kelas-qr-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.dashboard-siswa-kelas-info {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.dashboard-siswa-btn-download-qr {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  gap: 10px;
+  background: var(--primary-blue);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  margin-right: 6px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.dashboard-siswa-btn-download-qr:hover {
+  background-color: #0056b3;
+}
+
+.dashboard-siswa-riwayat-absensi table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.dashboard-siswa-riwayat-absensi th,
+.dashboard-siswa-riwayat-absensi td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.dashboard-siswa-riwayat-absensi th {
+  background-color: #f2f2f2;
+}
+
+.dashboard-siswa-absensi-jadwal-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.dashboard-siswa-persentase-kehadiran,
+.dashboard-siswa-jadwal-ekstrakurikuler {
+  flex: 1 1 300px;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.dashboard-siswa-progress-bar {
+  background-color: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 25px;
+  margin-top: 10px;
+}
+
+.dashboard-siswa-progress-fill {
+  background-color: var(--primary-blue);
+  height: 100%;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  line-height: 25px;
+  transition: width 0.5s ease-in-out;
+}
+
+ul {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+  .dashboard-siswa-kelas-qr-row,
+  .dashboard-siswa-absensi-jadwal-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+.dashboard-siswa-table-riwayat-siswa {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: "Poppins", sans-serif;
+  min-width: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.dashboard-siswa-table-riwayat-siswa th {
+  background: var(--primary-blue);
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.dashboard-siswa-table-riwayat-siswa th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.dashboard-siswa-table-riwayat-siswa th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.dashboard-siswa-table-riwayat-siswa td {
+  padding: 10px 24px;
+  font-size: 1rem;
+  color: #303030;
+}
+
+.dashboard-siswa-table-riwayat-siswa tr:nth-child(odd) td {
+  background: #fff;
+}
+
+.dashboard-siswa-table-riwayat-siswa tr:nth-child(even) td {
+  background: #f0f0f0;
+}
+
+.dashboard-siswa-table-riwayat-siswa tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+.dashboard-siswa-table-riwayat-siswa tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+.dashboard-siswa-table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+@media (max-width: 600px) {
+  .dashboard-siswa-table-container {
+    overflow-x: auto;
+  }
+
+  .dashboard-siswa-table-riwayat-siswa {
+    min-width: 100%;
+  }
+}
+
+.dashboard-siswa-card-title {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.dashboard-siswa-progress-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.dashboard-siswa-progress-list li {
+  margin-bottom: 16px;
+}
+
+.dashboard-siswa-progress-nama {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+}
+
+.dashboard-siswa-progress-bar {
+  width: 100%;
+  background: #e0e0e0;
+  height: 16px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.dashboard-siswa-progress-fill {
+  background: var(--primary-blue);
+  height: 100%;
+  color: #fff;
+  font-size: 0.75rem;
+  text-align: right;
+  padding-right: 6px;
+  line-height: 16px;
+  white-space: nowrap;
+  transition: width 0.3s ease;
+}
+
+.dashboard-siswa-progress-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard-siswa-jadwal-nanti-list,
+.dashboard-siswa-riwayat-absensi-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dashboard-siswa-jadwal-nanti-item,
+.dashboard-siswa-riwayat-absensi-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding: 8px;
+  background: #f9f9f9;
+  border-radius: 6px;
+}
+
+.dashboard-siswa-jadwal-nanti-tanggal,
+.dashboard-siswa-riwayat-absensi-jam {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.dashboard-siswa-jadwal-nanti-nama,
+.dashboard-siswa-riwayat-absensi-nama {
+  font-weight: 600;
+  flex: 1;
+}
+
+.dashboard-siswa-jadwal-nanti-hari,
+.dashboard-siswa-riwayat-absensi-ekskul {
+  color: #303030;
+  font-weight: 500;
+}
+
+.dashboard-siswa-card-2 {
+  width: 50%;
+  background-color: white;
+}
+
+.dashboard-siswa-card-2 .dashboard-siswa-card-title {
+  color: #303030;
+}
+
+.dashboard-siswa-card-2 .dashboard-siswa-jadwal-nanti-tanggal,
+.dashboard-siswa-card-2 .dashboard-siswa-jadwal-nanti-nama,
+.dashboard-siswa-card-2 .dashboard-siswa-jadwal-nanti-hari {
+  color: var(--primary-blue);
+  font-family: "Poppins", sans-serif;
+}
+
+.dashboard-siswa-card-2 .dashboard-siswa-jadwal-nanti-nama {
+  margin-left: 2rem;
+}
+
+@media (max-width: 600px) {
+  .dashboard-siswa-card-2 {
+    width: 100%;
+  }
+}
+
+.dashboard-siswa-dashboard-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+}

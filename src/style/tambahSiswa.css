@@ -1,0 +1,123 @@
+/* Tambahkan di siswa.css */
+.form-tambah-siswa {
+  background: transparent;
+  border: 2px solid var(--primary-blue);
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-tambah-siswa label {
+  font-weight: 600;
+  color: var(--primary-blue);
+}
+
+.form-tambah-siswa input {
+  padding: 0.7rem 1rem;
+  border: 1.5px solid var(--primary-blue);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: transparent;
+  color: #222;
+}
+
+.btn-tambah {
+  background: var(--primary-blue);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 2rem;
+}
+
+.btn-tambah:hover {
+  background: #2d5fa7; /* warna primary blue lebih terang */
+}
+
+@media (max-width: 700px) {
+  .search-input-container-ekstrakurikuler {
+    width: 100%;
+  }
+  .search-input-container-ekstrakurikuler .search-input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+.form-upload-siswa {
+  background: transparent; /* Sesuai dengan .form-tambah-siswa */
+  border: 2px solid var(--primary-blue); /* Sama dengan Tambah Siswa */
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-upload-siswa label {
+  font-weight: 600;
+  color: var(--primary-blue);
+}
+
+.form-upload-siswa input {
+  padding: 0.7rem 1rem;
+  border: 1.5px solid var(--primary-blue);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: transparent;
+  color: #222;
+}
+
+.btn-upload {
+  background: var(--primary-blue); /* Sesuai dengan tombol Tambah */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 2rem;
+}
+
+.btn-upload:hover {
+  background: #2d5fa7; /* Sesuai dengan hover tombol Tambah */
+}
+
+.btn-download {
+  background: var(--primary-blue);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-download:hover {
+  background: #2d5fa7;
+}

@@ -1,0 +1,727 @@
+/* ===== FLEX CONTAINER & CHILD ===== */
+.ekstrakurikuler-flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.ekstrakurikuler-flex-child {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.ekstrakurikuler-title {
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 900px) {
+  .ekstrakurikuler-flex-container {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .ekstrakurikuler-flex-child {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* ===== BUTTONS ===== */
+.ekstrakurikuler-btn-add,
+.ekstrakurikuler-btn-search {
+  background: var(--primary-blue);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(39, 84, 138, 0.08);
+}
+
+.ekstrakurikuler-btn-search {
+  background: transparent;
+  border: 1px solid #303030;
+}
+
+.ekstrakurikuler-btn-add img,
+.ekstrakurikuler-btn-search img {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+.ekstrakurikuler-btn-add:hover,
+.ekstrakurikuler-btn-search:hover {
+  background: var(--accent-yellow);
+}
+
+.ekstrakurikuler-btn-search:hover {
+  background: var(--primary-blue);
+  color: white;
+}
+
+.ekstrakurikuler-btn-add {
+  color: #fff;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===== SEARCH INPUT ===== */
+.ekstrakurikuler-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ekstrakurikuler-search-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.ekstrakurikuler-search-icon-inside {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.ekstrakurikuler-search-input {
+  padding: 10px 14px 10px 38px;
+  border: 1px solid #303030;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  background: #fff;
+  color: #222;
+  width: 16rem;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(39, 84, 138, 0.08);
+}
+
+.ekstrakurikuler-search-input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 2px 12px rgba(39, 84, 138, 0.15);
+}
+
+@media (max-width: 700px) {
+  .ekstrakurikuler-search-input {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+  .ekstrakurikuler-search-input-container {
+    width: 100%;
+  }
+}
+
+/* ===== TABLE DESKTOP ===== */
+.ekstrakurikuler-table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 2rem;
+}
+
+.ekstrakurikuler-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: "Poppins", sans-serif;
+  min-width: 700px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.ekstrakurikuler-table th {
+  background: var(--primary-blue);
+  color: #fff;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+}
+.ekstrakurikuler-table th:first-child {
+  border-top-left-radius: 10px;
+}
+.ekstrakurikuler-table th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.ekstrakurikuler-table td {
+  padding: 12px 28px;
+  font-size: 1rem;
+  color: #303030;
+}
+
+.ekstrakurikuler-table tr:nth-child(odd) td {
+  background: #fff;
+}
+.ekstrakurikuler-table tr:nth-child(even) td {
+  background: #e2e2e2;
+}
+
+.ekstrakurikuler-table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+.ekstrakurikuler-table tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+/* ===== TABLE BUTTONS ===== */
+.ekstrakurikuler-btn-aksi {
+  background: var(--primary-blue);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  margin-right: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ekstrakurikuler-btn-aksi:last-child {
+  margin-right: 0;
+}
+
+.ekstrakurikuler-btn-aksi img {
+  width: 18px;
+  height: 18px;
+  display: block;
+  pointer-events: none;
+}
+
+.ekstrakurikuler-btn-edit,
+.btn-edi {
+  background: var(--accent-yellow);
+}
+
+.ekstrakurikuler-btn-delete {
+  background: var(--danger-red);
+}
+
+.ekstrakurikuler-btn-aksi:hover {
+  filter: brightness(1.08);
+  opacity: 0.9;
+}
+
+/* ===== TABLE FOOTER & PAGINATION ===== */
+.ekstrakurikuler-table-footer-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ekstrakurikuler-pagination-nav {
+  display: flex;
+}
+
+.ekstrakurikuler-btn-page {
+  background: #fff;
+  color: var(--primary-blue);
+  border: 1.5px solid var(--primary-blue);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-right: 6px;
+}
+
+.ekstrakurikuler-btn-page.active,
+.ekstrakurikuler-btn-page:hover {
+  background: var(--primary-blue);
+  color: #fff;
+}
+
+.ekstrakurikuler-btn-page:last-child {
+  margin-right: 0;
+}
+
+/* ===== EXPORT BUTTON ===== */
+.ekstrakurikuler-export-nav .ekstrakurikuler-btn-export {
+  background: var(--success-green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(255, 216, 3, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ekstrakurikuler-btn-export img {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.ekstrakurikuler-btn-export:hover {
+  background: #2e8f5a;
+  color: #fff;
+}
+
+/* ===== RESPONSIVE TABLE FOOTER ===== */
+@media (max-width: 700px) {
+  .ekstrakurikuler-table-footer-container {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .ekstrakurikuler-export-nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .ekstrakurikuler-pagination-nav {
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* ===== SEARCH BUTTON ACTION ===== */
+.ekstrakurikuler-btn-search-action {
+  background: var(--primary-blue);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ekstrakurikuler-btn-search-action:hover {
+  background: #2d5fa7;
+}
+
+/* Tambahkan di ekstrakurikuler.css */
+.ekstrakurikuler-table-desktop {
+  display: block;
+}
+.ekstrakurikuler-table-mobile {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .ekstrakurikuler-table-desktop {
+    display: none;
+  }
+  .ekstrakurikuler-table-mobile {
+    display: block;
+  }
+}
+
+/* ===== TABLE MOBILE ===== */
+.ekstrakurikuler-table-mobile-container-mobile {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 2rem;
+}
+
+.ekstrakurikuler-table-mobile-mobile {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: "Poppins", sans-serif;
+  min-width: 350px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(39, 84, 138, 0.06);
+}
+
+.ekstrakurikuler-table-mobile-mobile th {
+  background: var(--primary-blue);
+  color: #fff;
+  padding: 12px 18px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-align: left;
+}
+.ekstrakurikuler-table-mobile-mobile th:first-child {
+  border-top-left-radius: 8px;
+}
+.ekstrakurikuler-table-mobile-mobile th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.ekstrakurikuler-table-mobile-mobile td {
+  padding: 10px 18px;
+  font-size: 0.98rem;
+  color: #303030;
+  background: #f9f9f9;
+}
+
+.ekstrakurikuler-table-mobile-mobile tr:nth-child(even) td {
+  background: #f1f1f1;
+}
+
+.ekstrakurikuler-btn-aksi-mobile,
+.ekstrakurikuler-btn-detail-mobile {
+  background: var(--primary-blue);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
+
+.ekstrakurikuler-btn-detail-mobile img {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.ekstrakurikuler-btn-aksi-mobile:hover,
+.ekstrakurikuler-btn-detail-mobile:hover {
+  background: var(--accent-yellow);
+}
+
+/* ===== PAGINATION MOBILE ===== */
+.ekstrakurikuler-table-footer-container-mobile {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.ekstrakurikuler-pagination-nav-mobile {
+  display: flex;
+}
+
+.ekstrakurikuler-btn-page-mobile {
+  background: #fff;
+  color: var(--primary-blue);
+  border: 1.5px solid var(--primary-blue);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-right: 6px;
+}
+
+.ekstrakurikuler-btn-page-mobile.active,
+.ekstrakurikuler-btn-page-mobile:hover {
+  background: var(--primary-blue);
+  color: #fff;
+}
+
+.ekstrakurikuler-btn-page-mobile:last-child {
+  margin-right: 0;
+}
+
+.ekstrakurikuler-btn-aksi-mobile {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+
+/* ===== EXPORT BUTTON MOBILE ===== */
+.ekstrakurikuler-export-nav-mobile {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ekstrakurikuler-btn-export-mobile {
+  background: var(--success-green, #3bb77e);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(39, 84, 138, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ekstrakurikuler-btn-export-mobile img {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.ekstrakurikuler-btn-export-mobile:hover {
+  background: #2e8f5a;
+  color: #fff;
+}
+
+.toast-success {
+  position: fixed;
+  left: 50%;
+  top: 4rem;
+  transform: translateX(-50%);
+  background: var(--success-green, #43b581);
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 9999;
+  animation: fadeInUp 0.3s;
+}
+
+.toast-error {
+  position: fixed;
+  left: 50%;
+  top: 4rem;
+  transform: translateX(-50%);
+  background: var(--danger-red);
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 9999;
+  animation: fadeInUp 0.3s;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.daftar-siswa-flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-container {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.btn-add-daftar-siswa,
+.btn-add-scan-siswa {
+  font-family: "Poppins", sans-serif;
+  background: var(--primary-blue);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(39, 84, 138, 0.08);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  gap: 10px;
+}
+
+.search-input-daftar-siswa {
+  padding: 10px 14px 10px 38px;
+  border: 1px solid #303030;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  background: #fff;
+  color: #222;
+  width: 16rem;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(39, 84, 138, 0.08);
+}
+
+.search-input-daftar-siswa:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 2px 12px rgba(39, 84, 138, 0.15);
+}
+
+@media (max-width: 700px) {
+  .daftar-siswa-flex-container {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .search-input-daftar-siswa {
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .daftar-siswa-flex-container {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  .daftar-siswa-flex-container > * {
+    width: 100%;
+  }
+}
+
+.siswa-table-mobile {
+  display: none;
+  margin-top: 3rem;
+}
+
+@media (max-width: 700px) {
+  .table-container {
+    display: none;
+  }
+  .siswa-table-mobile {
+    display: block;
+    width: 100%;
+  }
+  .siswa-table-mobile-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    background: #fff;
+  }
+  .siswa-table-mobile-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .siswa-table-mobile-nama {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .siswa-table-mobile-kelas {
+    font-size: 0.95rem;
+    color: #666;
+  }
+  .siswa-table-mobile-col.aksi {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+/* Header tabel siswa ekstrakurikuler */
+.siswa-table th {
+  background: var(--primary-blue, #27548a);
+  color: #fff;
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 16px;
+}
+
+/* Baris data dengan urutan genap */
+.siswa-table tr:nth-child(even) td {
+  background: #e2e2e2;
+}
+
+/* Untuk versi mobile */
+@media (max-width: 700px) {
+  .siswa-table-mobile-row {
+    background: #fff;
+  }
+  .siswa-table-mobile-row:nth-child(even) {
+    background: #d9d9d9;
+  }
+}
+
+.siswa-table-mobile tr.row-genap td {
+  background: #d9d9d9;
+}
+
+.btn-kembali-primary {
+  font-family: "Poppins", sans-serif;
+  background: var(--primary-blue, #27548a);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  font-size: 1.25rem;
+  transition: background 0.2s;
+  margin-top: 2rem;
+}
+
+.btn-kembali-primary:hover {
+  background: #18365a;
+}
+
+@media (max-width: 700px) {
+  .btn-kembali-primary {
+    display: block;
+    margin: 0 auto 18px auto;
+    width: 80vw;
+    max-width: 400px;
+    text-align: center;
+    margin-top: 2rem;
+  }
+}
+
+.btn-delete-daftar-siswa {
+  background: var(--danger-red, #f44336);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.3rem 0.7rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}

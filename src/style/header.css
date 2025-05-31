@@ -1,0 +1,96 @@
+/* Header.css */
+header {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 1.875rem 2rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  display : flex;
+  position: relative;
+}
+
+.header-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+
+
+/* Tambahkan di header.css */
+.hamburger {
+  position: relative;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 16px;
+}
+
+.hamburger span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: white;
+  border-radius: 2px;
+}
+
+@media (max-width: 900px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .header {
+    justify-content: space-between;
+  }
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 16px;
+  z-index: 200;
+  transition: all 0.3s;
+}
+
+.hamburger span {
+  display: block;
+  height: 4px;
+  width: 28px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+@media (max-width: 900px) {
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* Animasi hamburger menjadi X */
+.hamburger.open span:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+.header-logo {
+  height: 40px;
+  margin-right: 16px;
+}
