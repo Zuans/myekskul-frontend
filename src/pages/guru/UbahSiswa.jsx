@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import "../../style/tambahSiswa.css";
 import axios from "axios";
 
-export default function UbahSiswa() {
+export default function UbahSiswa({ apiURL }) {
   const { id } = useParams();
   const navigate = useNavigate();
   // Cari data siswa yang akan diubah berdasarkan id dari URL
@@ -15,9 +15,7 @@ export default function UbahSiswa() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:7878/api/siswa/id/${id}`
-        );
+        const response = await axios.get(`${apiURL}/api/siswa/id/${id}`);
         setSiswa(response.data);
       } catch (err) {
         setError("Data siswa tidak ditemukan.", err);
@@ -40,7 +38,7 @@ export default function UbahSiswa() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:7878/api/siswa/${id}`, {
+      await axios.put(`${apiURL}/api/siswa/${id}`, {
         nama: siswa.nama,
         kelas: siswa.kelas,
       });

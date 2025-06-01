@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../../style/login.css";
 import axios from "axios";
 
-const RegisterPage = () => {
+const RegisterPage = ({ apiURL }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [teacherName, setTeacherName] = useState("");
@@ -30,7 +30,7 @@ const RegisterPage = () => {
 
     // Simulasi proses pendaftaran
     try {
-      const response = await axios.post("http://localhost:7878/api/guru", {
+      const response = await axios.post(`${apiURL}/api/guru`, {
         username, // Menambahkan username ke request
         nama: teacherName,
         password,

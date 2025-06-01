@@ -3,7 +3,7 @@ import axios from "axios";
 import searchIcon from "../../assets/icon/cari.png";
 import "../../style/siswaRiwayat.css";
 
-export default function SiswaRiwayatAbsensi() {
+export default function SiswaRiwayatAbsensi({ apiURL }) {
   const { _id: id_siswa } = localStorage.getItem("userData")
     ? JSON.parse(localStorage.getItem("userData"))
     : {};
@@ -19,7 +19,7 @@ export default function SiswaRiwayatAbsensi() {
   const fetchAbsensi = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/siswa/riwayat-absensi/${id_siswa}`
+        `${apiURL}/api/siswa/riwayat-absensi/${id_siswa}`
       );
       setRiwayatAbsensi(response.data.riwayatAbsensi);
     } catch (err) {
@@ -51,10 +51,10 @@ export default function SiswaRiwayatAbsensi() {
   const handleSearch = async (searchValue) => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/siswa/search/riwayat-absensi/${id_siswa}/${searchValue}`
+        `${apiURL}/api/siswa/search/riwayat-absensi/${id_siswa}/${searchValue}`
       );
       console.log(
-        `http://localhost:7878/api/siswa/search/riwayat-absensi/${id_siswa}/${searchValue}`
+        `${apiURL}/api/siswa/search/riwayat-absensi/${id_siswa}/${searchValue}`
       );
       setRiwayatAbsensi(response.data.absensiList);
     } catch (err) {

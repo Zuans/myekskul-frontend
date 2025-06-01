@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import "../../style/tambahEkstrakurikuler.css";
 import axios from "axios";
 
-export default function EkstrakurikulerUbah() {
+export default function EkstrakurikulerUbah({ apiURL }) {
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -19,7 +19,7 @@ export default function EkstrakurikulerUbah() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:7878/api/ekstrakurikuler/id/${id}`
+          `${apiURL}/api/ekstrakurikuler/id/${id}`
         );
         const { nama, jam, hari } = await response.data;
         setNama(nama);
@@ -41,7 +41,7 @@ export default function EkstrakurikulerUbah() {
     const waktu = `${jam.padStart(2, "0")}:${menit.padStart(2, "0")}`;
 
     try {
-      await axios.put(`http://localhost:7878/api/ekstrakurikuler/${id}`, {
+      await axios.put(`${apiURL}/api/ekstrakurikuler/${id}`, {
         nama,
         hari,
         jam: waktu,

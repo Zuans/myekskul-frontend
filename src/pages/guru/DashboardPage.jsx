@@ -5,7 +5,7 @@ import scanIcon from "../../assets/icon/scan.png";
 import manualIcon from "../../assets/icon/edit.png";
 import axios from "axios";
 
-export default function DashboardPage() {
+export default function DashboardPage({ apiURL }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [showSuccess, setShowSuccess] = useState(!!location.state?.success);
@@ -34,11 +34,11 @@ export default function DashboardPage() {
     try {
       const { _id } = JSON.parse(localStorage.getItem("userData"));
       const response = await axios.get(
-        `http://localhost:7878/api/absensi/absenCepat/${_id}`
+        `${apiURL}/api/absensi/absenCepat/${_id}`
       );
       setEkstrakurikuler(response.data);
       const responseJadwalNanti = await axios.get(
-        `http://localhost:7878/api/guru/jadwalNanti/${_id}`
+        `${apiURL}/api/guru/jadwalNanti/${_id}`
       );
       const dataJadwal = responseJadwalNanti.data.schedules.map((data) => {
         return [
@@ -57,18 +57,18 @@ export default function DashboardPage() {
       setJadwal(dataJadwal);
 
       const responseAbsensiTerakhir = await axios.get(
-        `http://localhost:7878/api/absensi/absensiTerakhir/${_id}`
+        `${apiURL}/api/absensi/absensiTerakhir/${_id}`
       );
       const { absensi } = responseAbsensiTerakhir.data;
       setAbsensiTerakhir(absensi);
       const reponsePersentaseBulan = await axios.get(
-        `http://localhost:7878/api/absensi/persentaseBulan/${_id}`
+        `${apiURL}/api/absensi/persentaseBulan/${_id}`
       );
 
       setPersentaseBulan(reponsePersentaseBulan.data);
 
       const reponsePersentaseSemester = await axios.get(
-        `http://localhost:7878/api/absensi/persentaseSemester/${_id}`
+        `${apiURL}/api/absensi/persentaseSemester/${_id}`
       );
 
       setPersentaseSemester(reponsePersentaseSemester.data);

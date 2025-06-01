@@ -6,7 +6,7 @@ import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
-export default function LaporanAbsensiDetail() {
+export default function LaporanAbsensiDetail({ apiURL }) {
   const navigate = useNavigate();
   const [ekstrakurikuler, setEkstrakurikuler] = useState({});
 
@@ -24,7 +24,7 @@ export default function LaporanAbsensiDetail() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/ekstrakurikuler/id/${id}` // Ganti dengan ID guru yang sesuai
+        `${apiURL}/api/ekstrakurikuler/id/${id}` // Ganti dengan ID guru yang sesuai
       );
       setEkstrakurikuler(response.data);
     } catch (err) {

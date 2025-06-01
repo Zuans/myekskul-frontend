@@ -3,7 +3,7 @@ import "../../style/login.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
-const LoginForm = ({ setIsLoggedIn, setUserRole }) => {
+const LoginForm = ({ setIsLoggedIn, setUserRole, apiURL }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -32,13 +32,11 @@ const LoginForm = ({ setIsLoggedIn, setUserRole }) => {
   const handleFormLogin = async (e) => {
     try {
       e.preventDefault();
-      const response = await axios.post(
-        "http://localhost:7878/api/guru/login",
-        {
-          username,
-          password,
-        }
-      );
+      console.log(apiURL);
+      const response = await axios.post(`${apiURL}/api/guru/login`, {
+        username,
+        password,
+      });
       setIsLoggedIn(true);
       setUserRole(localStorage.setItem("userRole", response.data.role));
       localStorage.setItem("isLoggedIn", true);

@@ -9,7 +9,7 @@ import logoutIcon from "../assets/icon/logout.png";
 import axios from "axios";
 import downloadQRIcon from "../assets/icon/download.png";
 
-function Sidebar({ show, onClose, setIsLoggedIn }) {
+function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
   const location = useLocation();
   const navigate = useNavigate();
   const userRole = localStorage.getItem("userRole");
@@ -24,9 +24,8 @@ function Sidebar({ show, onClose, setIsLoggedIn }) {
   const handleDownloadQR = async () => {
     const { _id: id } = JSON.parse(localStorage.getItem("guruData") || "{}");
     try {
-      const response = await axios.get(
-        `http://localhost:7878/api/guru/qr/${id}`
-      );
+      const response = await axios.get(`${apiURL}/api/guru/qr/${id}`);
+      console.log(response.data, "link", `${apiURL}/api/guru/qr/${id}`);
       const { qr, guru } = response.data; // Simpan data base64 yang dikembalikan API
 
       // Cek apakah data base64 valid

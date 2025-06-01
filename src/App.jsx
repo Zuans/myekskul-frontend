@@ -33,6 +33,10 @@ function App() {
     localStorage.getItem("isLoggedIn") === "true"
   );
   const [userRole, setUserRole] = useState(localStorage.getItem("userRole"));
+  const isProd = true;
+  const apiURL = isProd
+    ? "https://myekskul-backend-production.up.railway.app"
+    : "http://localhost:7878";
 
   const [dataUser, setDataUser] = useState(
     JSON.parse(localStorage.getItem("userData")) || {}
@@ -63,12 +67,15 @@ function App() {
                 <LoginPage
                   setIsLoggedIn={setIsLoggedIn}
                   setUserRole={setUserRole}
+                  apiURL={apiURL}
                 />
               }
             />
             <Route
               path="/daftar"
-              element={<RegisterPage setIsLoggedIn={setIsLoggedIn} />}
+              element={
+                <RegisterPage setIsLoggedIn={setIsLoggedIn} apiURL={apiURL} />
+              }
             />
             <Route
               path="/qr"
@@ -76,12 +83,19 @@ function App() {
                 <GuruLoginScan
                   setIsLoggedIn={setIsLoggedIn}
                   setUserRole={setUserRole}
+                  apiURL={apiURL}
                 />
               }
             />
             <Route
               path="*"
-              element={<LoginPage setIsLoggedIn={setIsLoggedIn} />}
+              lement={
+                <LoginPage
+                  setIsLoggedIn={setIsLoggedIn}
+                  setUserRole={setUserRole}
+                  apiURL={apiURL}
+                />
+              }
             />
           </Routes>
         ) : (
@@ -119,84 +133,109 @@ function App() {
                     <>
                       <Route
                         path="/ekstrakurikuler"
-                        element={<EkstrakurikulerPage />}
+                        element={<EkstrakurikulerPage apiURL={apiURL} />}
                       />
                       <Route
                         path="/ekstrakurikuler/tambah"
-                        element={<EkstrakurikulerTambah />}
+                        element={<EkstrakurikulerTambah apiURL={apiURL} />}
                       />
-                      <Route path="/siswa/tambah" element={<TambahSiswa />} />
-                      <Route path="/siswa/ubah/:id" element={<UbahSiswa />} />
+                      <Route
+                        path="/siswa/tambah"
+                        element={<TambahSiswa apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/siswa/ubah/:id"
+                        element={<UbahSiswa apiURL={apiURL} />}
+                      />
                     </>
                   )}
-                  {/* Route khusus Guru */}
                   {userRole === "guru" && (
                     <>
-                      <Route path="/" element={<DashboardPage />} />{" "}
+                      <Route
+                        path="/"
+                        element={<DashboardPage apiURL={apiURL} />}
+                      />
                       <Route
                         path="/ekstrakurikuler"
-                        element={<EkstrakurikulerPage />}
-                      />{" "}
+                        element={<EkstrakurikulerPage apiURL={apiURL} />}
+                      />
                       <Route
                         path="/ekstrakurikuler/detail/:id"
-                        element={<EkstrakurikulerDetailPage />}
-                      />{" "}
+                        element={<EkstrakurikulerDetailPage apiURL={apiURL} />}
+                      />
                       <Route
                         path="/ekstrakurikuler/tambah"
-                        element={<EkstrakurikulerTambah />}
-                      />{" "}
+                        element={<EkstrakurikulerTambah apiURL={apiURL} />}
+                      />
                       <Route
                         path="/ekstrakurikuler/tambah/siswa/:id"
-                        element={<SiswaTambahScan />}
-                      />{" "}
+                        element={<SiswaTambahScan apiURL={apiURL} />}
+                      />
                       <Route
                         path="/ekstrakurikuler/ubah/:id"
-                        element={<EkstrakurikulerUbah />}
-                      />{" "}
+                        element={<EkstrakurikulerUbah apiURL={apiURL} />}
+                      />
                       <Route
                         path="/ekstrakurikuler/siswa/:idEkstrakurikuler"
-                        element={<EkstrakurikulerDaftarSiswa />}
-                      />{" "}
+                        element={<EkstrakurikulerDaftarSiswa apiURL={apiURL} />}
+                      />
                       <Route
                         path="/ekstrakurikuler/siswa/scan/:idEkstrakurikuler"
-                        element={<EkstrakurikulerScanAbsen />}
-                      />{" "}
-                      <Route path="/siswa" element={<SiswaPage />} />{" "}
-                      <Route path="/siswa/tambah" element={<TambahSiswa />} />{" "}
-                      <Route path="/siswa/ubah/:id" element={<UbahSiswa />} />{" "}
-                      SiswaScanAbsen{" "}
+                        element={<EkstrakurikulerScanAbsen apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/siswa"
+                        element={<SiswaPage apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/siswa/tambah"
+                        element={<TambahSiswa apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/siswa/ubah/:id"
+                        element={<UbahSiswa apiURL={apiURL} />}
+                      />
                       <Route
                         path="/detailsiswa/:id"
-                        element={<DetailSiswa />}
-                      />{" "}
-                      <Route path="/jadwal" element={<Jadwal />} />{" "}
+                        element={<DetailSiswa apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/jadwal"
+                        element={<Jadwal apiURL={apiURL} />}
+                      />
                       <Route
                         path="/laporanAbsensi"
-                        element={<LaporanAbsensi />}
-                      />{" "}
+                        element={<LaporanAbsensi apiURL={apiURL} />}
+                      />
                       <Route
                         path="/laporanAbsensi/:kegiatan/:id/"
-                        element={<LaporanAbsensiDetail />}
-                      />{" "}
+                        element={<LaporanAbsensiDetail apiURL={apiURL} />}
+                      />
                       <Route
                         path="/laporanAbsensi/pertemuan/:kegiatan/:id/"
-                        element={<LaporanAbsensDaftarPertemuanTable />}
-                      />{" "}
+                        element={
+                          <LaporanAbsensDaftarPertemuanTable apiURL={apiURL} />
+                        }
+                      />
                       <Route
                         path="/laporanAbsensi/detail/:tanggal"
-                        element={<DetailAbsensi />}
-                      />{" "}
-                      ''
+                        element={<DetailAbsensi apiURL={apiURL} />}
+                      />
                     </>
                   )}
-                  {/* Route khusus Siswa */}
                   {userRole === "siswa" && (
                     <>
-                      <Route path="/" element={<SiswaDashboard />} />
-                      <Route path="/jadwal-siswa" element={<SiswaJadwal />} />
+                      <Route
+                        path="/"
+                        element={<SiswaDashboard apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/jadwal-siswa"
+                        element={<SiswaJadwal apiURL={apiURL} />}
+                      />
                       <Route
                         path="/riwayat-absensi"
-                        element={<SiswaRiwayatAbsensi />}
+                        element={<SiswaRiwayatAbsensi apiURL={apiURL} />}
                       />
                     </>
                   )}

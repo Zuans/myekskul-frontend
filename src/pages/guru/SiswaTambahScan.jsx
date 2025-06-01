@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 import axios from "axios";
 
-export default function SiswaTambahScan() {
+export default function SiswaTambahScan({ apiURL }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [scanResult, setScanResult] = useState("");
@@ -36,7 +36,7 @@ export default function SiswaTambahScan() {
               console.log(id);
               try {
                 const response = await axios.post(
-                  `http://localhost:7878/api/siswa/ekstrakurikuler/${decodedText}/${id}`
+                  `${apiURL}/api/siswa/ekstrakurikuler/${decodedText}/${id}`
                 );
 
                 // Navigasi ke halaman ekstrakurikuler

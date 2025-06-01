@@ -12,7 +12,7 @@ import SiswaTableMobile from "../../components/TableSiswaMobile.jsx";
 
 const DATA_PER_PAGE = 5;
 
-export default function SiswaPage() {
+export default function SiswaPage({ apiURL }) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -29,7 +29,7 @@ export default function SiswaPage() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:7878/api/siswa");
+      const response = await axios.get(`${apiURL}/api/siswa`);
       setSiswa(response.data);
     } catch (err) {
       console.error("Error fetching data:", err);
@@ -71,7 +71,7 @@ export default function SiswaPage() {
     const searchSiswa = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:7878/api/siswa/search/${inputRef.current.value}`
+          `${apiURL}/api/siswa/search/${inputRef.current.value}`
         );
         setPage(1);
         setSiswa(response.data);
@@ -85,7 +85,7 @@ export default function SiswaPage() {
   const getSiswaByKelas = async (kelas) => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/siswa/search/kelas/${kelas}`
+        `${apiURL}/api/siswa/search/kelas/${kelas}`
       );
       setSiswa(response.data);
     } catch (err) {
@@ -97,7 +97,7 @@ export default function SiswaPage() {
   const onExport = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:7878/api/siswa/export",
+        `${apiURL}/api/siswa/export`,
         { siswa }, // Pastikan siswa adalah array
         { responseType: "blob" }
       );
@@ -120,9 +120,7 @@ export default function SiswaPage() {
 
   const downloadQRSiswa = async (id) => {
     try {
-      const response = await axios.get(
-        `http://localhost:7878/api/siswa/qr/${id}`
-      );
+      const response = await axios.get(`${apiURL}/api/siswa/qr/${id}`);
       const { barcode, siswa } = response.data;
 
       if (!barcode.startsWith("data:image/png;base64,")) {
@@ -209,7 +207,7 @@ export default function SiswaPage() {
     setShowToast(false);
 
     try {
-      await axios.delete(`http://localhost:7878/api/siswa/${deleteId}`);
+      await axios.delete(`${apiURL}/api/siswa/${deleteId}`);
       setDeleteId(null);
       setShowSuccessDelete(true);
       // Panggil ulang fetchData untuk memperbarui daftar siswa

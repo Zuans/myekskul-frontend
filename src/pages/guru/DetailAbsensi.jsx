@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation, useParams } from "react-router-dom";
 
-export default function DetailAbsensi() {
+export default function DetailAbsensi({ apiURL }) {
   const { tanggal } = useParams();
   const [siswa, setSiswa] = useState([]);
   const location = useLocation();
@@ -23,7 +23,7 @@ export default function DetailAbsensi() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/absensi/daftar/${tanggal}/${ekstrakurikulerId}` // Ganti dengan ID guru yang sesuai
+        `${apiURL}/api/absensi/daftar/${tanggal}/${ekstrakurikulerId}` // Ganti dengan ID guru yang sesuai
       );
       setSiswa(response.data);
       console.log(response.data);
@@ -79,7 +79,7 @@ export default function DetailAbsensi() {
       }
 
       await axios.put(
-        `http://localhost:7878/api/absensi/selectHadir/${tanggal}/${ekstrakurikulerId}`,
+        `${apiURL}/api/absensi/selectHadir/${tanggal}/${ekstrakurikulerId}`,
         { selectedData: filteredData }
       );
       fetchData();
@@ -101,7 +101,7 @@ export default function DetailAbsensi() {
       }
 
       await axios.put(
-        `http://localhost:7878/api/absensi/selectAbsen/${tanggal}/${ekstrakurikulerId}`,
+        `${apiURL}/api/absensi/selectAbsen/${tanggal}/${ekstrakurikulerId}`,
         { selectedData: filteredData }
       );
       fetchData();

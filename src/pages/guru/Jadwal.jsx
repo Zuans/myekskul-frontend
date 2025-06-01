@@ -5,7 +5,7 @@ import JadwalTableMobile from "../../components/JadwalTableMobile";
 import searchIcon from "../../assets/icon/cari.png"; // Import search icon
 import "../../style/Jadwal.css"; // Import CSS file for styling
 
-export default function Jadwal() {
+export default function Jadwal({ apiURL }) {
   const { _id: id_guru } = localStorage.getItem("userData")
     ? JSON.parse(localStorage.getItem("userData"))
     : {};
@@ -18,7 +18,7 @@ export default function Jadwal() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/ekstrakurikuler/guru/${id_guru}` // Ganti dengan ID guru yang sesuai
+        `${apiURL}/api/ekstrakurikuler/guru/${id_guru}` // Ganti dengan ID guru yang sesuai
       );
       setEkstrakurikuler(response.data);
     } catch (err) {
@@ -54,7 +54,7 @@ export default function Jadwal() {
     const val = searchValue || inputRef;
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/ekstrakurikuler/guru/search/${id_guru}/${val}`
+        `${apiURL}/api/ekstrakurikuler/guru/search/${id_guru}/${val}`
       );
       setEkstrakurikuler(response.data);
     } catch (err) {

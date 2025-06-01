@@ -5,7 +5,7 @@ import editIcon from "../../assets/icon/edit.png";
 import deleteIcon from "../../assets/icon/delete.png";
 import axios from "axios";
 
-export default function DetailSiswa() {
+export default function DetailSiswa({ apiURL }) {
   const navigate = useNavigate();
   const { id } = useParams();
   const [siswa, setSiswa] = useState();
@@ -16,9 +16,7 @@ export default function DetailSiswa() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:7878/api/siswa/id/${id}`
-        );
+        const response = await axios.get(`${apiURL}/api/siswa/id/${id}`);
         const data = await response.data;
         console.log(data);
         const dataSiswa = [
@@ -39,9 +37,7 @@ export default function DetailSiswa() {
 
   const downloadQRSiswa = async (id) => {
     try {
-      const response = await axios.get(
-        `http://localhost:7878/api/siswa/qr/${id}`
-      );
+      const response = await axios.get(`${apiURL}/api/siswa/qr/${id}`);
       const { barcode, siswa } = response.data; // Simpan data base64 yang dikembalikan API
 
       // Cek apakah data base64 valid
@@ -73,7 +69,7 @@ export default function DetailSiswa() {
     setShowToast(false);
 
     try {
-      await axios.delete(`http://localhost:7878/api/siswa/${id}`);
+      await axios.delete(`${apiURL}/api/siswa/${id}`);
     } catch (err) {
       console.error("Error when deleting data:", err);
     }

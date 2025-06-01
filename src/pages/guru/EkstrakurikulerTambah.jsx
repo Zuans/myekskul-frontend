@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../../style/tambahEkstrakurikuler.css";
 import axios from "axios";
 
-export default function TambahEkstrakurikuler() {
+export default function TambahEkstrakurikuler({ apiURL }) {
   const [nama, setNama] = useState("");
   const [hari, setHari] = useState("");
   const [jam, setJam] = useState("");
@@ -15,15 +15,12 @@ export default function TambahEkstrakurikuler() {
     e.preventDefault(); // Mencegah reload halaman
 
     try {
-      const response = await axios.post(
-        "http://localhost:7878/api/ekstrakurikuler",
-        {
-          nama,
-          hari,
-          jam: `${jam}:${menit}`, // Format waktu menjadi "HH:MM"
-          id_guru,
-        }
-      );
+      const response = await axios.post(`${apiURL}/api/ekstrakurikuler`, {
+        nama,
+        hari,
+        jam: `${jam}:${menit}`, // Format waktu menjadi "HH:MM"
+        id_guru,
+      });
 
       console.log("Data berhasil ditambahkan:", response.data);
 

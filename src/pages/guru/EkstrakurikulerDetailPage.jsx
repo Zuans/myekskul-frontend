@@ -6,7 +6,7 @@ import "../../style/detailEkstrakurikuler.css";
 import userIcon from "../../assets/icon/user.png";
 import axios from "axios";
 
-export default function EkstrakurikulerDetailMobile() {
+export default function EkstrakurikulerDetailMobile({ apiURL }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const PAGE_SIZE = 5;
@@ -28,7 +28,7 @@ export default function EkstrakurikulerDetailMobile() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:7878/api/ekstrakurikuler/id/${id}`
+          `${apiURL}/api/ekstrakurikuler/id/${id}`
         );
         setEkstrakurikuler(response.data);
       } catch (err) {
@@ -47,7 +47,7 @@ export default function EkstrakurikulerDetailMobile() {
 
   const handleDeleteClick = async () => {
     try {
-      await axios.delete(`http://localhost:7878/api/ekstrakurikuler/${id}`);
+      await axios.delete(`${apiURL}/api/ekstrakurikuler/${id}`);
 
       // Aktifkan toast sukses
 

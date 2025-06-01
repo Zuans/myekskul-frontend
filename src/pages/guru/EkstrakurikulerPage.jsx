@@ -9,7 +9,7 @@ import axios from "axios";
 
 const DATA_PER_PAGE = 5;
 
-export default function EkstrakurikulerPage() {
+export default function EkstrakurikulerPage({ apiURL }) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -28,7 +28,7 @@ export default function EkstrakurikulerPage() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/ekstrakurikuler/guru/${id_guru}` // Ganti dengan ID guru yang sesuai
+        `${apiURL}/api/ekstrakurikuler/guru/${id_guru}` // Ganti dengan ID guru yang sesuai
       );
       setEkstrakurikuler(response.data);
     } catch (err) {
@@ -81,7 +81,7 @@ export default function EkstrakurikulerPage() {
     const val = searchValue || inputRef;
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/ekstrakurikuler/guru/search/${id_guru}/${val}`
+        `${apiURL}/api/ekstrakurikuler/guru/search/${id_guru}/${val}`
       );
       setEkstrakurikuler(response.data);
     } catch (err) {
@@ -119,9 +119,7 @@ export default function EkstrakurikulerPage() {
     // Tampilkan notifikasi sukses jika perlu
 
     try {
-      await axios.delete(
-        `http://localhost:7878/api/ekstrakurikuler/${deleteId}`
-      );
+      await axios.delete(`${apiURL}/api/ekstrakurikuler/${deleteId}`);
       setDeleteId(null);
       setShowSuccessDelete(true);
       // Panggil ulang fetchData untuk memperbarui daftar siswa

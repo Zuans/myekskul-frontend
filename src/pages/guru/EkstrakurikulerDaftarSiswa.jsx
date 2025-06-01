@@ -10,7 +10,7 @@ import axios from "axios";
 
 const DATA_PER_PAGE = 5;
 
-export default function EkstrakurikulerDaftarSiswa() {
+export default function EkstrakurikulerDaftarSiswa({ apiURL }) {
   const { idEkstrakurikuler } = useParams();
   const location = useLocation();
   const [showSuccess, setShowSuccess] = useState(false);
@@ -29,7 +29,7 @@ export default function EkstrakurikulerDaftarSiswa() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/siswa/daftar/ekstrakurikuler/${idEkstrakurikuler}`
+        `${apiURL}/api/siswa/daftar/ekstrakurikuler/${idEkstrakurikuler}`
       );
       setSiswa(response.data);
     } catch (err) {
@@ -68,7 +68,7 @@ export default function EkstrakurikulerDaftarSiswa() {
 
     try {
       await axios.delete(
-        `http://localhost:7878/api/siswa/ekstrakurikuler/${deleteId}/${idEkstrakurikuler}`
+        `${apiURL}/api/siswa/ekstrakurikuler/${deleteId}/${idEkstrakurikuler}`
       );
       setDeleteId(null);
       setShowSuccessDelete(true);

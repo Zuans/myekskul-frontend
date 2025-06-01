@@ -3,7 +3,7 @@ import "../../style/siswaDashboard.css";
 import downloadIcon from "../../assets/icon/download.png";
 import axios from "axios";
 
-export default function DashboardSiswa() {
+export default function DashboardSiswa({ apiURL }) {
   const [data, setData] = useState(null);
   const [absensi, setAbsensi] = useState([]);
   const [persentaseBulan, setPersentaseBulan] = useState();
@@ -28,10 +28,7 @@ export default function DashboardSiswa() {
   const getPersentaseBulanIni = async (data) => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/siswa/persentase-bulan/${data._id}`
-      );
-      console.log(
-        `http://localhost:7878/api/siswa/persentase-bulan/${data._id}`
+        `${apiURL}/api/siswa/persentase-bulan/${data._id}`
       );
       setPersentaseBulan(response.data);
       console.log(response.data);
@@ -43,7 +40,7 @@ export default function DashboardSiswa() {
   const getJadwalNanti = async (data) => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/siswa/jadwal-nanti/${data._id}`
+        `${apiURL}/api/siswa/jadwal-nanti/${data._id}`
       );
       setJadwalNanti(response.data);
     } catch (error) {
@@ -54,7 +51,7 @@ export default function DashboardSiswa() {
   const getAbsensiTerakhir = async (data) => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/siswa/absensi-terakhir/${data._id}`
+        `${apiURL}/api/siswa/absensi-terakhir/${data._id}`
       );
       setAbsensi(response.data);
     } catch (error) {
@@ -64,9 +61,7 @@ export default function DashboardSiswa() {
 
   const downloadQRSiswa = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:7878/api/siswa/qr/${data._id}`
-      );
+      const response = await axios.get(`${apiURL}/api/siswa/qr/${data._id}`);
       const { barcode, siswa } = response.data;
 
       if (!barcode.startsWith("data:image/png;base64,")) {

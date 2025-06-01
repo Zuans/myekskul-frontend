@@ -11,7 +11,7 @@ let { _id: id_guru } = localStorage.getItem("userData")
   ? JSON.parse(localStorage.getItem("userData"))
   : {};
 
-export default function LaporanAbsensi() {
+export default function LaporanAbsensi({ apiURL }) {
   const navigate = useNavigate();
   const [ekstrakurikuler, setEkstrakurikuler] = useState([]);
   const [dataGuru, setDataGuru] = useState();
@@ -21,9 +21,8 @@ export default function LaporanAbsensi() {
 
   const fetchData = async () => {
     try {
-      console.log(`http://localhost:7878/api/ekstrakurikuler/guru/${id_guru}`);
       const response = await axios.get(
-        `http://localhost:7878/api/ekstrakurikuler/guru/${id_guru}` // Ganti dengan ID guru yang sesuai
+        `${apiURL}/api/ekstrakurikuler/guru/${id_guru}` // Ganti dengan ID guru yang sesuai
       );
       setDataGuru(JSON.parse(localStorage.getItem("dataGuru")));
       console.log(dataGuru);
@@ -82,7 +81,7 @@ export default function LaporanAbsensi() {
     const val = searchValue || inputRef;
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/ekstrakurikuler/guru/search/${id_guru}/${val}`
+        `${apiURL}/api/ekstrakurikuler/guru/search/${id_guru}/${val}`
       );
       setEkstrakurikuler(response.data);
     } catch (err) {

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 import axios from "axios";
 
-export default function GuruLoginScan({ setIsLoggedIn, setUserRole }) {
+export default function GuruLoginScan({ setIsLoggedIn, setUserRole, apiURL }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [scanResult, setScanResult] = useState("");
@@ -36,13 +36,15 @@ export default function GuruLoginScan({ setIsLoggedIn, setUserRole }) {
               console.log(id);
               try {
                 const response = await axios.post(
-                  `http://localhost:7878/api/guru/login/qr`,
+                  `${apiURL}/api/guru/login/qr`,
                   {
                     userId: decodedText,
                   }
                 );
                 setIsLoggedIn(true);
-                setUserRole(localStorage.setItem("userRole", response.data.role));
+                setUserRole(
+                  localStorage.setItem("userRole", response.data.role)
+                );
                 localStorage.setItem("isLoggedIn", true);
                 localStorage.setItem("userRole", response.data.role);
                 localStorage.setItem("userData", JSON.stringify(response.data));

@@ -5,7 +5,7 @@ import JadwalTableMobile from "../../components/JadwalTableMobile";
 import searchIcon from "../../assets/icon/cari.png";
 import "../../style/Jadwal.css";
 
-export default function JadwalSiswa() {
+export default function JadwalSiswa({ apiURL }) {
   const { _id: id_siswa } = localStorage.getItem("userData")
     ? JSON.parse(localStorage.getItem("userData"))
     : {};
@@ -19,7 +19,7 @@ export default function JadwalSiswa() {
   const fetchJadwal = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/siswa/jadwal-nanti/${id_siswa}`
+        `${apiURL}/api/siswa/jadwal-nanti/${id_siswa}`
       );
       setJadwalNanti(response.data.jadwalNanti);
     } catch (err) {
@@ -54,11 +54,9 @@ export default function JadwalSiswa() {
     const val = searchValue || inputRef.current.value;
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/siswa/search/jadwal-nanti/${id_siswa}/${val}`
+        `${apiURL}/api/siswa/search/jadwal-nanti/${id_siswa}/${val}`
       );
-      console.log(
-        `http://localhost:7878/api/siswa/search/jadwal-nanti/${id_siswa}/${val}`
-      );
+
       setJadwalNanti(response.data.jadwalNanti);
     } catch (err) {
       setShowError(true);

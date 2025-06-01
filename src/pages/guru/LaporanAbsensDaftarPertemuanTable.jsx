@@ -8,7 +8,7 @@ import axios from "axios";
 
 const PAGE_SIZE = 5;
 
-export default function LaporanAbsensDaftarPertemuanTable() {
+export default function LaporanAbsensDaftarPertemuanTable({ apiURL }) {
   const navigate = useNavigate();
   const [ekstrakurikuler, setEkstrakurikuler] = useState([]);
   const [activeButton, setActiveButton] = useState(null);
@@ -29,7 +29,7 @@ export default function LaporanAbsensDaftarPertemuanTable() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/absensi/daftarTanggal/${idEkstrakurikuler}` // Ganti dengan ID guru yang sesuai
+        `${apiURL}/api/absensi/daftarTanggal/${idEkstrakurikuler}` // Ganti dengan ID guru yang sesuai
       );
       setEkstrakurikuler([...response.data]);
     } catch (err) {
@@ -59,7 +59,7 @@ export default function LaporanAbsensDaftarPertemuanTable() {
     if (activeButton === "bulan") {
       try {
         const response = await axios.get(
-          `http://localhost:7878/api/absensi/daftar/export/bulanIni/${idEkstrakurikuler}`, // Ganti dengan ID guru yang sesuai
+          `${apiURL}/api/absensi/daftar/export/bulanIni/${idEkstrakurikuler}`, // Ganti dengan ID guru yang sesuai
           {
             responseType: "blob",
           }
@@ -101,7 +101,7 @@ export default function LaporanAbsensDaftarPertemuanTable() {
     } else if (activeButton === "semester") {
       try {
         const response = await axios.get(
-          `http://localhost:7878/api/absensi/daftar/export/semesterIni/${idEkstrakurikuler}`, // Ganti dengan ID guru yang sesuai
+          `${apiURL}/api/absensi/daftar/export/semesterIni/${idEkstrakurikuler}`, // Ganti dengan ID guru yang sesuai
           {
             responseType: "blob",
           }
@@ -135,7 +135,7 @@ export default function LaporanAbsensDaftarPertemuanTable() {
   const handleViewMonth = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/absensi/daftar/bulanIni/${idEkstrakurikuler}` // Ganti dengan ID guru yang sesuai
+        `${apiURL}/api/absensi/daftar/bulanIni/${idEkstrakurikuler}` // Ganti dengan ID guru yang sesuai
       );
       setEkstrakurikuler([...response.data]);
     } catch (err) {
@@ -146,7 +146,7 @@ export default function LaporanAbsensDaftarPertemuanTable() {
   const handleViewSemester = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/absensi/daftar/semesterIni/${idEkstrakurikuler}` // Ganti dengan ID guru yang sesuai
+        `${apiURL}/api/absensi/daftar/semesterIni/${idEkstrakurikuler}` // Ganti dengan ID guru yang sesuai
       );
       console.log(response.data);
       setEkstrakurikuler([...response.data.data]);

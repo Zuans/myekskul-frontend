@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 import axios from "axios";
 
-export default function EkstrakurikulerScanAbsen() {
+export default function EkstrakurikulerScanAbsen({ apiURL }) {
   const { idEkstrakurikuler } = useParams();
   const navigate = useNavigate();
   const [scanResult, setScanResult] = useState("");
@@ -16,7 +16,7 @@ export default function EkstrakurikulerScanAbsen() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:7878/api/ekstrakurikuler/id/${idEkstrakurikuler}` // Ganti dengan ID guru yang sesuai
+        `${apiURL}/api/ekstrakurikuler/id/${idEkstrakurikuler}` // Ganti dengan ID guru yang sesuai
       );
       setEkstrakurikuler(response.data);
     } catch (err) {
@@ -52,7 +52,7 @@ export default function EkstrakurikulerScanAbsen() {
 
               try {
                 const response = await axios.post(
-                  `http://localhost:7878/api/absensi/${decodedText}/${idEkstrakurikuler}`
+                  `${apiURL}/api/absensi/${decodedText}/${idEkstrakurikuler}`
                 );
                 console.log(response);
                 // Navigasi ke halaman ekstrakurikuler
