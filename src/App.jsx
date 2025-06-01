@@ -99,7 +99,7 @@ function App() {
             />
             <Route
               path="*"
-              lement={
+              element={
                 <LoginPage
                   setIsLoggedIn={setIsLoggedIn}
                   setUserRole={setUserRole}
