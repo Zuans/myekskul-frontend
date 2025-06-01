@@ -62,6 +62,16 @@ function App() {
         {!isLoggedIn ? (
           <Routes>
             <Route
+              path="/"
+              element={
+                <LoginPage
+                  setIsLoggedIn={setIsLoggedIn}
+                  setUserRole={setUserRole}
+                  apiURL={apiURL}
+                />
+              }
+            />
+            <Route
               path="/login"
               element={
                 <LoginPage

@@ -38,7 +38,7 @@ export default function TambahSiswa({ apiURL }) {
 
   const handleDownloadTemplate = async () => {
     try {
-      const response = await axios.get(`${apiURL}api/siswa/template`, {
+      const response = await axios.get(`${apiURL}/api/siswa/template`, {
         responseType: "blob", // Pastikan respons berupa file
       });
 

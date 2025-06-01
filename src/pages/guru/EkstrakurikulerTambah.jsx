@@ -22,8 +22,6 @@ export default function TambahEkstrakurikuler({ apiURL }) {
         id_guru,
       });
 
-      console.log("Data berhasil ditambahkan:", response.data);
-
       // Reset input setelah berhasil submit
       setNama("");
       setHari("");
