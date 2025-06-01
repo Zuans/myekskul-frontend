@@ -22,10 +22,10 @@ function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
   };
 
   const handleDownloadQR = async () => {
-    const { _id: id } = JSON.parse(localStorage.getItem("guruData") || "{}");
+    const { _id: id } = JSON.parse(localStorage.getItem("userData") || "{}");
     try {
+      console.log(`${apiURL}/api/guru/qr/${id}`);
       const response = await axios.get(`${apiURL}/api/guru/qr/${id}`);
-      console.log(response.data, "link", `${apiURL}/api/guru/qr/${id}`);
       const { qr, guru } = response.data; // Simpan data base64 yang dikembalikan API
 
       // Cek apakah data base64 valid
@@ -153,11 +153,7 @@ function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
                 Laporan Absensi
               </Link>
             </li>
-            <li
-              className={
-                location.pathname.startsWith("/downloadQR") ? "active" : ""
-              }
-            >
+            <li>
               <Link to="/downloadQR" onClick={handleDownloadQR}>
                 <img
                   src={downloadQRIcon}

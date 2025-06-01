@@ -33,7 +33,7 @@ function App() {
     localStorage.getItem("isLoggedIn") === "true"
   );
   const [userRole, setUserRole] = useState(localStorage.getItem("userRole"));
-  const isProd = true;
+  const isProd = false;
   const apiURL = isProd
     ? "https://myekskul-backend-production.up.railway.app"
     : "http://localhost:7878";
@@ -121,6 +121,7 @@ function App() {
                 show={sidebarOpen}
                 onClose={() => setSidebarOpen(false)}
                 setIsLoggedIn={setIsLoggedIn}
+                apiURL={apiURL}
               />{" "}
               {sidebarOpen && (
                 <div
