@@ -33,7 +33,7 @@ function App() {
     localStorage.getItem("isLoggedIn") === "true"
   );
   const [userRole, setUserRole] = useState(localStorage.getItem("userRole"));
-  const isProd = false;
+  const isProd = true;
   const apiURL = isProd
     ? "https://myekskul-backend-production.up.railway.app"
     : "http://localhost:7878";
