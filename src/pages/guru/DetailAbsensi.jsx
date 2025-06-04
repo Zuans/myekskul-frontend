@@ -26,7 +26,6 @@ export default function DetailAbsensi({ apiURL }) {
         `${apiURL}/api/absensi/daftar/${tanggal}/${ekstrakurikulerId}` // Ganti dengan ID guru yang sesuai
       );
       setSiswa(response.data);
-      console.log(response.data);
     } catch (err) {
       console.error("Error fetching data:", err);
     }

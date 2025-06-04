@@ -103,6 +103,32 @@ export default function EkstrakurikulerDaftarSiswa({ apiURL }) {
     setShowToast(true);
   };
 
+  const onExport = async () => {
+    try {
+      const response = await axios.get(
+        `${apiURL}/api/ekstrakurikuler/${idEkstrakurikuler}/export-daftar-siswa`,
+        { responseType: "blob" }
+      );
+      console.log(
+        `${apiURL}/api/ekstrakurikuler/${idEkstrakurikuler}/export-daftar-siswa`
+      );
+      // Buat URL untuk file yang diunduh
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+
+      // Penamaan file dengan bulan dan tahun
+
+      link.setAttribute("download", `Daftar_Siswa_Ekstrakurikuler.xlsx`);
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Error downloading file:", error);
+      alert("Gagal mengunduh file. Coba lagi nanti.");
+    }
+  };
   // Pagination logic
   const totalPage = Math.ceil(siswa.length / DATA_PER_PAGE);
   const startIdx = (page - 1) * DATA_PER_PAGE;
@@ -189,7 +215,7 @@ export default function EkstrakurikulerDaftarSiswa({ apiURL }) {
           </button>
         </div>
         <button className="btn-export">
-          <img src={excelIcon} alt="export" />
+          <img src={excelIcon} alt="export" onClick={onExport} />
           Export Excel
         </button>
       </div>

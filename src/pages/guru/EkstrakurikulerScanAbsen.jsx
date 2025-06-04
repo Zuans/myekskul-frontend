@@ -48,13 +48,12 @@ export default function EkstrakurikulerScanAbsen({ apiURL }) {
             { facingMode: "environment" },
             { fps: 10, qrbox: 200 },
             async (decodedText) => {
-              setScanResult(decodedText);
-
+              console.log(decodedText);
               try {
                 const response = await axios.post(
                   `${apiURL}/api/absensi/${decodedText}/${idEkstrakurikuler}`
                 );
-                console.log(response);
+
                 // Navigasi ke halaman ekstrakurikuler
                 navigate(`/ekstrakurikuler/siswa/${idEkstrakurikuler}`, {
                   state: { success: "Absensi Siswa Sukses" },

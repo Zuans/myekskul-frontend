@@ -4,6 +4,7 @@ import downloadIcon from "../../assets/icon/download.png";
 import editIcon from "../../assets/icon/edit.png";
 import deleteIcon from "../../assets/icon/delete.png";
 import axios from "axios";
+import { jsPDF } from "jspdf";
 
 export default function DetailSiswa({ apiURL }) {
   const navigate = useNavigate();
@@ -49,13 +50,13 @@ export default function DetailSiswa({ apiURL }) {
 
       const img = new Image();
       img.src = barcode;
-      img.onload = () => {
-        // Ukuran final untuk kartu siswa
-        const cardWidth = 827;
-        const cardHeight = 1239;
-        const paddingTop = 100; // Ruang untuk nama sekolah
-        const paddingBottom = 120; // Ruang untuk info siswa
-        const qrSize = 450; // Ukuran QR Code
+      img.onload = async () => {
+        // Ukuran kartu siswa (8.5 × 10.5 cm pada 150 DPI)
+        const cardWidth = 503;
+        const cardHeight = 621;
+        const paddingTop = 50; // Ruang untuk nama sekolah
+        const paddingBottom = 70; // Ruang untuk info siswa
+        const qrSize = 250; // Ukuran QR Code
 
         canvas.width = cardWidth;
         canvas.height = cardHeight;
@@ -63,11 +64,10 @@ export default function DetailSiswa({ apiURL }) {
         // Gambar background sekolah (atas)
         ctx.fillStyle = "#27548a";
         ctx.fillRect(0, 0, cardWidth, paddingTop);
-        ctx.font = "bold 40px Poppins";
+        ctx.font = "bold 28px Poppins";
         ctx.fillStyle = "#ffffff";
         ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("SMP Anugerah Abadi", cardWidth / 2, paddingTop / 2);
+        ctx.fillText("SMP Anugerah Abadi", cardWidth / 2, paddingTop - 20);
 
         // Posisi QR Code di tengah kartu
         const qrX = (cardWidth - qrSize) / 2;
@@ -78,36 +78,39 @@ export default function DetailSiswa({ apiURL }) {
         ctx.fillStyle = "#ffffff";
         ctx.fillRect(0, qrSize + paddingTop + qrY, cardWidth, paddingBottom);
 
-        // border
-        ctx.lineWidth = 28; // Ketebalan border
-        ctx.strokeStyle = "#27548a"; // Warna border
-        ctx.strokeRect(1.5, 1.5, cardWidth - 3, cardHeight - 3); // Border di seluruh kartu
+        // Border kartu siswa
+        ctx.lineWidth = 8;
+        ctx.strokeStyle = "#27548a";
+        ctx.strokeRect(2, 2, cardWidth - 4, cardHeight - 4);
 
         // Tambahkan nama & kelas siswa
-        ctx.font = "bold 36px Poppins";
+        ctx.font = "bold 26px Poppins";
         ctx.fillStyle = "#27548a";
-        ctx.fillText(siswa.nama, cardWidth / 2, qrSize + paddingTop + qrY + 50);
+        ctx.fillText(siswa.nama, cardWidth / 2, qrSize + paddingTop + qrY + 40);
         ctx.fillText(
           `Kelas ${siswa.kelas}`,
           cardWidth / 2,
-          qrSize + paddingTop + qrY + 100
+          qrSize + paddingTop + qrY + 80
         );
 
-        // Konversi canvas ke gambar
-        const finalImage = canvas.toDataURL("image/png");
-
-        // Unduh gambar sebagai kartu siswa
-        const link = document.createElement("a");
-        link.href = finalImage;
-        link.download = `Kartu_Siswa_${siswa.nama}.png`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        // Simpan sebagai PDF agar tidak berubah ukuran di Google Docs
+        saveAsPDF(canvas.toDataURL("image/png"), siswa.nama);
       };
     } catch (err) {
       console.error("Error downloading QR code:", err);
       alert("Gagal mengunduh QR code. Silakan coba lagi.");
     }
+  };
+
+  // Fungsi untuk menyimpan gambar sebagai PDF agar tidak berubah ukuran saat dimasukkan ke Google Docs
+  const saveAsPDF = (imageSrc, namaSiswa) => {
+    const doc = new jsPDF({
+      unit: "cm",
+      format: [8.5, 10.5], // Ukuran sesuai cetak
+    });
+
+    doc.addImage(imageSrc, "PNG", 0, 0, 8.5, 10.5);
+    doc.save(`Kartu_Siswa_${namaSiswa}.pdf`);
   };
 
   const handleDeleteClick = () => {

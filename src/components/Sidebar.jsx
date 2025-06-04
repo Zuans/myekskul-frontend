@@ -8,6 +8,7 @@ import laporanIcon from "../assets/icon/laporan.png";
 import logoutIcon from "../assets/icon/logout.png";
 import axios from "axios";
 import downloadQRIcon from "../assets/icon/download.png";
+import { jsPDF } from "jspdf";
 
 function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
   const location = useLocation();
@@ -23,6 +24,7 @@ function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
 
   const handleDownloadQR = async () => {
     const { _id: id } = JSON.parse(localStorage.getItem("userData") || "{}");
+
     try {
       console.log(`${apiURL}/api/guru/qr/${id}`);
       const response = await axios.get(`${apiURL}/api/guru/qr/${id}`);
@@ -33,20 +35,72 @@ function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
         throw new Error("Format base64 tidak valid");
       }
 
-      // Buat elemen `<a>` untuk mengunduh gambar
-      const link = document.createElement("a");
-      link.href = qr;
-      link.download = `QR_Guru_${guru.nama}.png`; // Tentukan nama file
-      document.body.appendChild(link);
-      link.click(); // Trigger download
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
 
-      // Hapus elemen setelah download selesai
-      document.body.removeChild(link);
-      navigate("/");
+      const img = new Image();
+      img.src = qr;
+      img.onload = async () => {
+        // Ukuran final untuk QR kartu guru (8.5 × 10.5 cm pada 150 DPI)
+        const cardWidth = 503;
+        const cardHeight = 621;
+        const paddingTop = 50; // Ruang untuk nama sekolah
+        const paddingBottom = 70; // Ruang untuk info guru
+        const qrSize = 250; // Ukuran QR Code
+
+        canvas.width = cardWidth;
+        canvas.height = cardHeight;
+
+        // Gambar background sekolah (atas)
+        ctx.fillStyle = "#27548a";
+        ctx.fillRect(0, 0, cardWidth, paddingTop);
+        ctx.font = "bold 28px Poppins";
+        ctx.fillStyle = "#ffffff";
+        ctx.textAlign = "center";
+        ctx.fillText("SMP Anugerah Abadi", cardWidth / 2, paddingTop - 20);
+
+        // Posisi QR Code di tengah kartu
+        const qrX = (cardWidth - qrSize) / 2;
+        const qrY = (cardHeight - qrSize - paddingTop - paddingBottom) / 2;
+        ctx.drawImage(img, qrX, qrY + paddingTop, qrSize, qrSize);
+
+        // Gambar background teks guru (bawah)
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, qrSize + paddingTop + qrY, cardWidth, paddingBottom);
+
+        // Border kartu guru
+        ctx.lineWidth = 8;
+        ctx.strokeStyle = "#27548a";
+        ctx.strokeRect(2, 2, cardWidth - 4, cardHeight - 4);
+
+        // Tambahkan nama & jabatan guru
+        ctx.font = "bold 26px Poppins";
+        ctx.fillStyle = "#27548a";
+        ctx.fillText(guru.nama, cardWidth / 2, qrSize + paddingTop + qrY + 40);
+        ctx.fillText(
+          `- Guru Ekstrakurikuler -`,
+          cardWidth / 2,
+          qrSize + paddingTop + qrY + 80
+        );
+
+        // Simpan sebagai PDF agar tidak berubah ukuran di Google Docs
+        saveAsPDF(canvas.toDataURL("image/png"), guru.nama);
+      };
     } catch (err) {
       console.error("Error downloading QR code:", err);
       alert("Gagal mengunduh QR code. Silakan coba lagi.");
     }
+  };
+
+  // Fungsi untuk menyimpan gambar sebagai PDF agar tidak berubah ukuran saat dimasukkan ke Google Docs
+  const saveAsPDF = (imageSrc, namaGuru) => {
+    const doc = new jsPDF({
+      unit: "cm",
+      format: [8.5, 10.5], // Ukuran sesuai cetak
+    });
+
+    doc.addImage(imageSrc, "PNG", 0, 0, 8.5, 10.5);
+    doc.save(`Kartu_Guru_${namaGuru}.pdf`);
   };
 
   const handleLogout = () => {
