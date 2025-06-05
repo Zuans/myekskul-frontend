@@ -26,6 +26,8 @@ import DetailAbsensi from "./pages/guru/DetailAbsensi.jsx";
 import SiswaDashboard from "./pages/siswa/SiswaDashboard.jsx";
 import SiswaJadwal from "./pages/siswa/SiswaJadwal.jsx";
 import SiswaRiwayatAbsensi from "./pages/siswa/SiswaRiwayatAbsensi.jsx";
+import GuruPage from "./pages/admin/GuruPage.jsx";
+import UbahDataGuru from "./pages/guru/UbahDataGuru.jsx";
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -33,7 +35,7 @@ function App() {
     localStorage.getItem("isLoggedIn") === "true"
   );
   const [userRole, setUserRole] = useState(localStorage.getItem("userRole"));
-  const isProd = true;
+  const isProd = false;
   const apiURL = isProd
     ? "https://myekskul-backend-production.up.railway.app"
     : "http://localhost:7878";
@@ -147,8 +149,41 @@ function App() {
                         element={<EkstrakurikulerPage apiURL={apiURL} />}
                       />
                       <Route
+                        path="/guru"
+                        element={<GuruPage apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/guru/ubah/:id"
+                        element={<UbahDataGuru apiURL={apiURL} />}
+                      />
+
+                      <Route
+                        path="/ekstrakurikuler/detail/:id"
+                        element={<EkstrakurikulerDetailPage apiURL={apiURL} />}
+                      />
+                      <Route
                         path="/ekstrakurikuler/tambah"
                         element={<EkstrakurikulerTambah apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/ekstrakurikuler/tambah/siswa/:id"
+                        element={<SiswaTambahScan apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/ekstrakurikuler/ubah/:id"
+                        element={<EkstrakurikulerUbah apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/ekstrakurikuler/siswa/:idEkstrakurikuler"
+                        element={<EkstrakurikulerDaftarSiswa apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/ekstrakurikuler/siswa/scan/:idEkstrakurikuler"
+                        element={<EkstrakurikulerScanAbsen apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/siswa"
+                        element={<SiswaPage apiURL={apiURL} />}
                       />
                       <Route
                         path="/siswa/tambah"
@@ -158,6 +193,32 @@ function App() {
                         path="/siswa/ubah/:id"
                         element={<UbahSiswa apiURL={apiURL} />}
                       />
+                      <Route
+                        path="/detailsiswa/:id"
+                        element={<DetailSiswa apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/jadwal"
+                        element={<Jadwal apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/laporanAbsensi"
+                        element={<LaporanAbsensi apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/laporanAbsensi/:kegiatan/:id/"
+                        element={<LaporanAbsensiDetail apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/laporanAbsensi/pertemuan/:kegiatan/:id/"
+                        element={
+                          <LaporanAbsensDaftarPertemuanTable apiURL={apiURL} />
+                        }
+                      />
+                      <Route
+                        path="/laporanAbsensi/detail/:tanggal"
+                        element={<DetailAbsensi apiURL={apiURL} />}
+                      />
                     </>
                   )}
                   {userRole === "guru" && (
@@ -166,6 +227,7 @@ function App() {
                         path="/"
                         element={<DashboardPage apiURL={apiURL} />}
                       />
+
                       <Route
                         path="/ekstrakurikuler"
                         element={<EkstrakurikulerPage apiURL={apiURL} />}
@@ -231,6 +293,10 @@ function App() {
                       <Route
                         path="/laporanAbsensi/detail/:tanggal"
                         element={<DetailAbsensi apiURL={apiURL} />}
+                      />
+                      <Route
+                        path="/pengaturanAkun/:id"
+                        element={<UbahDataGuru apiURL={apiURL} />}
                       />
                     </>
                   )}

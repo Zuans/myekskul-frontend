@@ -11,6 +11,10 @@ export default function EkstrakurikulerDetailMobile({ apiURL }) {
   const navigate = useNavigate();
   const PAGE_SIZE = 5;
 
+  const isAdmin = localStorage.getItem("userRole")
+    ? localStorage.getItem("userRole") == "admin"
+    : false;
+
   const [ekstrakurikuler, setEkstrakurikuler] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -79,6 +83,7 @@ export default function EkstrakurikulerDetailMobile({ apiURL }) {
             <th>Nama Kegiatan</th>
             <th>Hari</th>
             <th>Jam</th>
+            {isAdmin && <th>Guru</th>}
           </tr>
         </thead>
         <tbody>
@@ -86,6 +91,7 @@ export default function EkstrakurikulerDetailMobile({ apiURL }) {
             <td>{ekstrakurikuler.nama}</td>
             <td>{ekstrakurikuler.hari}</td>
             <td>{ekstrakurikuler.jam}</td>
+            {isAdmin && <td>{ekstrakurikuler.nama_guru}</td>}
           </tr>
         </tbody>
       </table>

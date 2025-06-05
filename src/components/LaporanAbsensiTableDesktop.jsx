@@ -9,6 +9,9 @@ export default function LaporanAbsensiTableDesktop({
   onPageChange,
   onExport,
 }) {
+  const isAdmin = localStorage.getItem("userRole")
+    ? localStorage.getItem("userRole") == "admin"
+    : false;
   return (
     <div className="laporan-absensi-table-container">
       <table className="laporan-absensi-table">
@@ -18,6 +21,7 @@ export default function LaporanAbsensiTableDesktop({
             <th>Kegiatan</th>
             <th>Hari</th>
             <th>Jam</th>
+            {isAdmin && <th>Guru</th>}
             <th>Aksi</th>
           </tr>
         </thead>
@@ -38,6 +42,7 @@ export default function LaporanAbsensiTableDesktop({
               <td>{ekstrakurikuler.nama}</td>
               <td>{ekstrakurikuler.hari}</td>
               <td>{ekstrakurikuler.jam}</td>
+              {isAdmin && <td>{ekstrakurikuler.nama_guru}</td>}
               <td>
                 <button
                   className="btn-detail"

@@ -15,6 +15,10 @@ export default function TableEkstrakurikuler({
   onDelete,
   onExport,
 }) {
+  const isAdmin = localStorage.getItem("userRole")
+    ? localStorage.getItem("userRole") == "admin"
+    : false;
+
   const navigate = useNavigate();
 
   const totalPage = Math.ceil(data.length / DATA_PER_PAGE);
@@ -31,6 +35,7 @@ export default function TableEkstrakurikuler({
               <th>Kegiatan</th>
               <th>Hari</th>
               <th>Jam</th>
+              {isAdmin && <th>Guru</th>}
               <th>Siswa</th>
               <th>Aksi</th>
             </tr>
@@ -42,6 +47,7 @@ export default function TableEkstrakurikuler({
                 <td>{ekskul.nama}</td>
                 <td>{ekskul.hari}</td>
                 <td>{ekskul.jam}</td>
+                {isAdmin && <td>{ekskul.nama_guru}</td>}
                 <td>
                   <button
                     className="ekstrakurikuler-btn-aksi ekstrakurikuler-btn-user"

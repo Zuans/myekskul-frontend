@@ -1,4 +1,7 @@
 export default function JadwalTableMobile({ data }) {
+  const isAdmin = localStorage.getItem("userRole")
+    ? localStorage.getItem("userRole") == "admin"
+    : false;
   return (
     <div className="jadwal-table-mobile">
       <table style={{ width: "100%" }}>
@@ -7,6 +10,7 @@ export default function JadwalTableMobile({ data }) {
             <th>Kegiatan</th>
             <th>Hari</th>
             <th>Jam</th>
+            {isAdmin && <th>Guru</th>}
           </tr>
         </thead>
         <tbody>
@@ -22,6 +26,7 @@ export default function JadwalTableMobile({ data }) {
               <td>{item.nama}</td>
               <td>{item.hari}</td>
               <td>{item.jam}</td>
+              {isAdmin && <td>{item.nama_guru}</td>}
             </tr>
           ))}
         </tbody>

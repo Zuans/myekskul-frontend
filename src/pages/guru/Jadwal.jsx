@@ -15,12 +15,23 @@ export default function Jadwal({ apiURL }) {
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [showError, setShowError] = useState(false);
 
+  const isAdmin = localStorage.getItem("userRole")
+    ? localStorage.getItem("userRole") == "admin"
+    : false;
+
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        `${apiURL}/api/ekstrakurikuler/guru/${id_guru}` // Ganti dengan ID guru yang sesuai
-      );
-      setEkstrakurikuler(response.data);
+      if (isAdmin) {
+        const response = await axios.get(
+          `${apiURL}/api/admin/ekstrakurikuler` // Ganti dengan ID guru yang sesuai
+        );
+        setEkstrakurikuler(response.data);
+      } else {
+        const response = await axios.get(
+          `${apiURL}/api/ekstrakurikuler/guru/${id_guru}` // Ganti dengan ID guru yang sesuai
+        );
+        setEkstrakurikuler(response.data);
+      }
     } catch (err) {
       console.error("Error fetching data:", err);
     }

@@ -6,14 +6,20 @@ import ekstrakurikulerIcon from "../assets/icon/ekstrakurikuler.png";
 import jadwalIcon from "../assets/icon/jadwal.png";
 import laporanIcon from "../assets/icon/laporan.png";
 import logoutIcon from "../assets/icon/logout.png";
+import guruIcon from "../assets/icon/guru.png";
+import settingIcon from "../assets/icon/setting.png";
 import axios from "axios";
 import downloadQRIcon from "../assets/icon/download.png";
 import { jsPDF } from "jspdf";
+import { useState } from "react";
 
 function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
   const location = useLocation();
   const navigate = useNavigate();
   const userRole = localStorage.getItem("userRole");
+  const [guruData, setGuruData] = useState(
+    JSON.parse(localStorage.getItem("userData"))
+  );
 
   // Handler agar sidebar menutup otomatis di mobile
   const handleNavClick = async () => {
@@ -26,7 +32,6 @@ function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
     const { _id: id } = JSON.parse(localStorage.getItem("userData") || "{}");
 
     try {
-      console.log(`${apiURL}/api/guru/qr/${id}`);
       const response = await axios.get(`${apiURL}/api/guru/qr/${id}`);
       const { qr, guru } = response.data; // Simpan data base64 yang dikembalikan API
 
@@ -123,6 +128,18 @@ function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
       <ul>
         {userRole === "admin" && (
           <>
+            <li className={location.pathname === "/" ? "active" : ""}>
+              <Link to="/" onClick={handleNavClick}>
+                <img src={berandaIcon} alt="Beranda" className="sidebar-icon" />
+                Beranda
+              </Link>
+            </li>
+            <li className={location.pathname === "/" ? "guru" : ""}>
+              <Link to="/guru" onClick={handleNavClick}>
+                <img src={guruIcon} alt="Guru" className="sidebar-icon" />
+                Guru
+              </Link>
+            </li>
             <li
               className={location.pathname.startsWith("/siswa") ? "active" : ""}
             >
@@ -144,6 +161,45 @@ function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
                 />
                 Ekstrakurikuler
               </Link>
+            </li>
+            <li
+              className={
+                location.pathname.startsWith("/jadwal") ? "active" : ""
+              }
+            >
+              <Link to="/jadwal" onClick={handleNavClick}>
+                <img
+                  src={jadwalIcon}
+                  alt="Jadwal Kegiatan"
+                  className="sidebar-icon"
+                />
+                Jadwal Kegiatan
+              </Link>
+            </li>
+            <li
+              className={
+                location.pathname.startsWith("/laporanAbsensi") ? "active" : ""
+              }
+            >
+              <Link to="/laporanAbsensi" onClick={handleNavClick}>
+                <img
+                  src={laporanIcon}
+                  alt="Laporan Absensi"
+                  className="sidebar-icon"
+                />
+                Laporan Absensi
+              </Link>
+            </li>
+            <li
+              className={
+                location.pathname.startsWith("/downloadQR") ? "active" : ""
+              }
+            >
+              <a href="" onClick={handleLogout}>
+                {" "}
+                <img src={logoutIcon} alt="Logout" className="sidebar-icon" />
+                Logout
+              </a>
             </li>
           </>
         )}
@@ -219,6 +275,23 @@ function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
             </li>
             <li
               className={
+                location.pathname.startsWith("/pengaturanAkun") ? "active" : ""
+              }
+            >
+              <Link
+                to={`/pengaturanAkun/${guruData._id}`}
+                onClick={handleNavClick}
+              >
+                <img
+                  src={settingIcon}
+                  alt="Setting icon"
+                  className="sidebar-icon"
+                />
+                Pengaturan Akun
+              </Link>
+            </li>
+            <li
+              className={
                 location.pathname.startsWith("/downloadQR") ? "active" : ""
               }
             >
@@ -255,23 +328,19 @@ function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
                 Jadwal Kegiatan
               </Link>
             </li>
-            <li
-              className={
-                location.pathname.startsWith("/riwayat-absensi") ? "active" : ""
-              }
-            >
+            <li className={location.pathname.startsWith("/") ? "active" : ""}>
               <Link to="/riwayat-absensi" onClick={handleNavClick}>
                 <img
-                  src={laporanIcon}
+                  src={settingIcon}
                   alt="Laporan Absensi"
                   className="sidebar-icon"
                 />
-                Riwayat Absensi
+                Pengaturan Akun
               </Link>
             </li>
             <li
               className={
-                location.pathname.startsWith("/downloadQR") ? "active" : ""
+                location.pathname.startsWith("/logout") ? "active" : ""
               }
             >
               <a href="" onClick={handleLogout}>

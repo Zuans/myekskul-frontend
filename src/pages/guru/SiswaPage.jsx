@@ -11,8 +11,6 @@ import excelIcon from "../../assets/icon/excel.png";
 import SiswaTableMobile from "../../components/TableSiswaMobile.jsx";
 import { jsPDF } from "jspdf";
 
-const DATA_PER_PAGE = 5;
-
 export default function SiswaPage({ apiURL }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,6 +25,8 @@ export default function SiswaPage({ apiURL }) {
   const [deleteId, setDeleteId] = useState(null);
   const [showError, setShowError] = useState(false);
   const [showNotFound, setShowNotFound] = useState(false);
+
+  const DATA_PER_PAGE = 5;
 
   const fetchData = async () => {
     try {

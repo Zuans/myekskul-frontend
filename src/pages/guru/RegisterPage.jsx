@@ -40,7 +40,7 @@ const RegisterPage = ({ apiURL }) => {
       });
     } catch (error) {
       const errorMessage =
-        error.response?.data?.error || "Gagal menambahkan siswa!";
+        error.response?.data?.error || "Gagal mendaftarkan akun coba lagi";
       navigate(`/login`, {
         state: { error: errorMessage },
       });

@@ -27,10 +27,17 @@ export default function EkstrakurikulerPage({ apiURL }) {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        `${apiURL}/api/ekstrakurikuler/guru/${id_guru}` // Ganti dengan ID guru yang sesuai
-      );
-      setEkstrakurikuler(response.data);
+      if (localStorage.getItem("userRole") == "admin") {
+        const response = await axios.get(
+          `${apiURL}/api/admin/ekstrakurikuler` // Ganti dengan ID guru yang sesuai
+        );
+        setEkstrakurikuler(response.data);
+      } else {
+        const response = await axios.get(
+          `${apiURL}/api/ekstrakurikuler/guru/${id_guru}` // Ganti dengan ID guru yang sesuai
+        );
+        setEkstrakurikuler(response.data);
+      }
     } catch (err) {
       console.error("Error fetching data:", err);
     }

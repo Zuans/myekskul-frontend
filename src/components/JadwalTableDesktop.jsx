@@ -1,4 +1,7 @@
 export default function JadwalTableDesktop({ data }) {
+  const isAdmin = localStorage.getItem("userRole")
+    ? localStorage.getItem("userRole") == "admin"
+    : false;
   return (
     <div className="table-container">
       <table className="jadwal-table">
@@ -8,6 +11,7 @@ export default function JadwalTableDesktop({ data }) {
             <th>Kegiatan</th>
             <th>Hari</th>
             <th>Jam</th>
+            {isAdmin && <th>Guru</th>}
           </tr>
         </thead>
         <tbody>
@@ -24,6 +28,7 @@ export default function JadwalTableDesktop({ data }) {
               <td>{item.nama}</td>
               <td>{item.hari}</td>
               <td>{item.jam}</td>
+              {isAdmin && <td>{item.nama_guru}</td>}
             </tr>
           ))}
         </tbody>

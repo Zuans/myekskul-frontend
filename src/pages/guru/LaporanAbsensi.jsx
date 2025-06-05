@@ -14,19 +14,30 @@ let { _id: id_guru } = localStorage.getItem("userData")
 export default function LaporanAbsensi({ apiURL }) {
   const navigate = useNavigate();
   const [ekstrakurikuler, setEkstrakurikuler] = useState([]);
-  const [dataGuru, setDataGuru] = useState();
+  const [userData, setUserData] = useState();
   const [showError, setShowError] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
   const [searchTimeout, setSearchTimeout] = useState(null);
 
+  const isAdmin = localStorage.getItem("userRole")
+    ? localStorage.getItem("userRole") == "admin"
+    : false;
+
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        `${apiURL}/api/ekstrakurikuler/guru/${id_guru}` // Ganti dengan ID guru yang sesuai
-      );
-      setDataGuru(JSON.parse(localStorage.getItem("dataGuru")));
-      console.log(dataGuru);
-      setEkstrakurikuler(response.data);
+      if (localStorage.getItem("userRole") == "admin") {
+        const response = await axios.get(
+          `${apiURL}/api/admin/ekstrakurikuler` // Ganti dengan ID guru yang sesuai
+        );
+        setUserData(JSON.parse(localStorage.getItem("userData")));
+        setEkstrakurikuler(response.data);
+      } else {
+        const response = await axios.get(
+          `${apiURL}/api/ekstrakurikuler/guru/${id_guru}` // Ganti dengan ID guru yang sesuai
+        );
+        setUserData(JSON.parse(localStorage.getItem("userData")));
+        setEkstrakurikuler(response.data);
+      }
     } catch (err) {
       console.error("Error fetching data:", err);
     }
