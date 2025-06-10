@@ -23,36 +23,29 @@ export default function GuruPage({ apiURL }) {
   const [requestGuruPage, setRequestGuruPage] = useState(1);
   const [guruPage, setGuruPage] = useState(1);
   const [showSuccessDelete, setShowSuccessDelete] = useState(false);
-
-  const reqData = [
-    { nama: "Budi Santoso" },
-    { nama: "Ani Wijaya" },
-    { nama: "Siti Rahma" },
-    { nama: "Joko Sembiring" },
-    { nama: "Dewi Lestari" },
-  ];
-
-  const dataGuru = [
-    { nama: "Budi Santoso" },
-    { nama: "Ani Wijaya" },
-    { nama: "Siti Rahma" },
-    { nama: "Joko Sembiring" },
-    { nama: "Dewi Lestari" },
-    { nama: "Joko Sembiring" },
-    { nama: "Dewi Lestari" },
-  ];
+  const [reqData, setReqData] = useState([]);
 
   const fetchDataGuru = async () => {
     try {
-      const response = await axios.get(`${apiURL}/api/guru`);
+      const response = await axios.get(`${apiURL}/api/guru/getApprove`);
       setGuru(response.data);
     } catch (err) {
       console.error("Error fetching data:", err);
     }
   };
 
+  const fetchRequestApproveGuru = async () => {
+    try {
+      const response = await axios.get(`${apiURL}/api/guru/getRequestApprove`);
+      setReqData(response.data);
+    } catch (err) {
+      console.error("Error fetching request approve data:", err);
+    }
+  };
+
   useEffect(() => {
     fetchDataGuru();
+    fetchRequestApproveGuru();
   }, []);
 
   useEffect(() => {
@@ -98,7 +91,7 @@ export default function GuruPage({ apiURL }) {
 
   const guruTotalPage = Math.ceil(guru.length / DATA_PER_PAGE);
   const guruStartIdx = (guruPage - 1) * DATA_PER_PAGE;
-  const guruCurrentData = dataGuru.slice(
+  const guruCurrentData = guru.slice(
     guruStartIdx,
     guruStartIdx + DATA_PER_PAGE
   );
@@ -135,7 +128,6 @@ export default function GuruPage({ apiURL }) {
 
     try {
       const response = await axios.delete(`${apiURL}/api/guru/${deleteId}`);
-      console.log(response.data);
       setDeleteId(null);
       setShowSuccessDelete(true);
 
@@ -154,6 +146,40 @@ export default function GuruPage({ apiURL }) {
     setDeleteId(null);
   };
 
+  const showToastMsg = (message, type) => {
+    const toast = document.createElement("div");
+    toast.className = type === "success" ? "toast-success" : "toast-error";
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.remove();
+    }, 2000); // Hilangkan toast setelah 3 detik
+  };
+
+  const handleApproveGuru = async (id) => {
+    try {
+      await axios.put(`${apiURL}/api/guru/approve/${id}`);
+      showToastMsg(" Akun guru berhasil di-approve!", "success");
+
+      setReqData((prev) => prev.filter((guru) => guru._id !== id));
+      fetchDataGuru();
+    } catch (error) {
+      showToastMsg(" Gagal meng-approve akun guru!", "error");
+    }
+  };
+
+  const handleRejectGuru = async (id) => {
+    try {
+      await axios.delete(`${apiURL}/api/guru/reject/${id}`);
+      showToastMsg(" Akun guru berhasil ditolak!", "success");
+
+      setReqData((prev) => prev.filter((guru) => guru._id !== id));
+    } catch (error) {
+      showToastMsg(" Gagal menolak akun guru!", "error");
+    }
+  };
+
   return (
     <>
       <h2 className="title">Guru</h2>
@@ -168,31 +194,34 @@ export default function GuruPage({ apiURL }) {
             </tr>
           </thead>
           <tbody>
-            {requestGuruCurrentData.length === 0 && (
+            {requestGuruCurrentData.length === 0 ? (
               <tr>
                 <td colSpan={3} style={{ textAlign: "center" }}>
                   Tidak ada data
                 </td>
               </tr>
+            ) : (
+              requestGuruCurrentData.map((guru, idx) => (
+                <tr key={requestGuruStartIdx + idx}>
+                  <td>{requestGuruStartIdx + idx + 1}</td>
+                  <td>{guru.nama}</td>
+                  <td>
+                    <button
+                      className="btn-approve"
+                      onClick={() => handleApproveGuru(guru._id)}
+                    >
+                      <img src={doneIcon} alt="done-button" />
+                    </button>
+                    <button
+                      className="btn-reject"
+                      onClick={() => handleRejectGuru(guru._id)}
+                    >
+                      <img src={deleteIcon} alt="reject-icon" />
+                    </button>
+                  </td>
+                </tr>
+              ))
             )}
-            {requestGuruCurrentData.map((guru, idx) => (
-              <tr key={requestGuruStartIdx + idx}>
-                <td>{requestGuruStartIdx + idx + 1}</td>
-                <td>{guru.nama}</td>
-                <td>
-                  <button className="btn-approve">
-                    <img src={doneIcon} alt="done-button" />
-                  </button>
-                  <button className="btn-reject">
-                    <img
-                      src={deleteIcon}
-                      onClick={() => handleDeleteClick(guru._id)}
-                      alt="reject-icon"
-                    />
-                  </button>
-                </td>
-              </tr>
-            ))}
           </tbody>
         </table>
       </div>

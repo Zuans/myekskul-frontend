@@ -34,7 +34,9 @@ export default function EkstrakurikulerDetailMobile({ apiURL }) {
         const response = await axios.get(
           `${apiURL}/api/ekstrakurikuler/id/${id}`
         );
+
         setEkstrakurikuler(response.data);
+        console.log(response.data);
       } catch (err) {
         setError("Data siswa tidak ditemukan.", err);
       } finally {

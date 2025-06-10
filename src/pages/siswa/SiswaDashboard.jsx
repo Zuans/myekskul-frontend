@@ -74,53 +74,51 @@ export default function DashboardSiswa({ apiURL }) {
       const img = new Image();
       img.src = barcode;
       img.onload = () => {
-        // Ukuran final untuk kartu siswa
-        const cardWidth = 827;
-        const cardHeight = 1239;
-        const paddingTop = 100; // Ruang untuk nama sekolah
-        const paddingBottom = 120; // Ruang untuk info siswa
-        const qrSize = 450; // Ukuran QR Code
+        // Ukuran kartu: 1003 x 1240 px (setara 8.5 x 10.5 cm pada 300 DPI)
+        const cardWidth = 1003;
+        const cardHeight = 1240;
+        const paddingTop = 100; // Ruang atas (judul)
+        const paddingBottom = 160; // Ruang bawah (nama dan kelas)
+        const qrSize = 500;
 
         canvas.width = cardWidth;
         canvas.height = cardHeight;
 
-        // Gambar background sekolah (atas)
+        // Bagian atas (judul sekolah)
         ctx.fillStyle = "#27548a";
         ctx.fillRect(0, 0, cardWidth, paddingTop);
-        ctx.font = "bold 40px Poppins";
+        ctx.font = "bold 52px Poppins";
         ctx.fillStyle = "#ffffff";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText("SMP Anugerah Abadi", cardWidth / 2, paddingTop / 2);
 
-        // Posisi QR Code di tengah kartu
+        // Posisi QR code
         const qrX = (cardWidth - qrSize) / 2;
         const qrY = (cardHeight - qrSize - paddingTop - paddingBottom) / 2;
         ctx.drawImage(img, qrX, qrY + paddingTop, qrSize, qrSize);
 
-        // Gambar background teks siswa (bawah)
+        // Background bawah (untuk teks)
         ctx.fillStyle = "#ffffff";
         ctx.fillRect(0, qrSize + paddingTop + qrY, cardWidth, paddingBottom);
 
-        // border
-        ctx.lineWidth = 28; // Ketebalan border
-        ctx.strokeStyle = "#27548a"; // Warna border
-        ctx.strokeRect(1.5, 1.5, cardWidth - 3, cardHeight - 3); // Border di seluruh kartu
+        // Border luar kartu
+        ctx.lineWidth = 8;
+        ctx.strokeStyle = "#27548a";
+        ctx.strokeRect(2, 2, cardWidth - 4, cardHeight - 4);
 
-        // Tambahkan nama & kelas siswa
-        ctx.font = "bold 36px Poppins";
+        // Teks nama & kelas siswa
+        ctx.font = "bold 48px Poppins";
         ctx.fillStyle = "#27548a";
-        ctx.fillText(siswa.nama, cardWidth / 2, qrSize + paddingTop + qrY + 50);
+        ctx.fillText(siswa.nama, cardWidth / 2, qrSize + paddingTop + qrY + 60);
         ctx.fillText(
           `Kelas ${siswa.kelas}`,
           cardWidth / 2,
-          qrSize + paddingTop + qrY + 100
+          qrSize + paddingTop + qrY + 120
         );
 
-        // Konversi canvas ke gambar
+        // Simpan sebagai gambar PNG
         const finalImage = canvas.toDataURL("image/png");
-
-        // Unduh gambar sebagai kartu siswa
         const link = document.createElement("a");
         link.href = finalImage;
         link.download = `Kartu_Siswa_${siswa.nama}.png`;

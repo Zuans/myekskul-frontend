@@ -228,26 +228,37 @@ export default function LaporanAbsensDaftarPertemuanTable({ apiURL }) {
           </tr>
         </thead>
         <tbody>
-          {pagedData.map((pertemuan, idx) => (
-            <tr key={idx}>
-              <td style={{ textAlign: "left", fontWeight: "bold" }}>
-                {pertemuan.tanggal}
-              </td>
-              <td>
-                <button
-                  className="btn-aksi btn-detail"
-                  title="Detail"
-                  onClick={() =>
-                    navigate(
-                      `/laporanAbsensi/detail/${pertemuan.tanggal}?ekstrakurikuler=${idEkstrakurikuler}`
-                    )
-                  }
-                >
-                  <img src={detailIcon} alt="Detail" />
-                </button>
+          {pagedData.length === 0 ? (
+            <tr>
+              <td
+                colSpan={2}
+                style={{ textAlign: "center", fontWeight: "bold" }}
+              >
+                Tidak ada data
               </td>
             </tr>
-          ))}
+          ) : (
+            pagedData.map((pertemuan, idx) => (
+              <tr key={idx}>
+                <td style={{ textAlign: "left", fontWeight: "bold" }}>
+                  {pertemuan.tanggal}
+                </td>
+                <td>
+                  <button
+                    className="btn-aksi btn-detail"
+                    title="Detail"
+                    onClick={() =>
+                      navigate(
+                        `/laporanAbsensi/detail/${pertemuan.tanggal}?ekstrakurikuler=${idEkstrakurikuler}`
+                      )
+                    }
+                  >
+                    <img src={detailIcon} alt="Detail" />
+                  </button>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
       <div className="laporan-absensi-table-footer-container">

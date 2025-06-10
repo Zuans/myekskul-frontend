@@ -38,7 +38,6 @@ export default function LaporanAbsensiDetail({ apiURL }) {
 
   const onPertemuan = () => {
     // Handle absensi logic here
-    console.log("Absensi button clicked");
 
     navigate(`/laporanAbsensi/pertemuan/${ekstrakurikuler.nama}/${id}`);
   };

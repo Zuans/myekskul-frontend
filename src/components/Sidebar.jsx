@@ -10,7 +10,6 @@ import guruIcon from "../assets/icon/guru.png";
 import settingIcon from "../assets/icon/setting.png";
 import axios from "axios";
 import downloadQRIcon from "../assets/icon/download.png";
-import { jsPDF } from "jspdf";
 import { useState } from "react";
 
 function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
@@ -33,9 +32,9 @@ function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
 
     try {
       const response = await axios.get(`${apiURL}/api/guru/qr/${id}`);
-      const { qr, guru } = response.data; // Simpan data base64 yang dikembalikan API
+      const { qr, guru } = response.data;
 
-      // Cek apakah data base64 valid
+      // Validasi base64 QR code
       if (!qr.startsWith("data:image/png;base64,")) {
         throw new Error("Format base64 tidak valid");
       }
@@ -45,51 +44,53 @@ function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
 
       const img = new Image();
       img.src = qr;
-      img.onload = async () => {
-        // Ukuran final untuk QR kartu guru (8.5 × 10.5 cm pada 150 DPI)
-        const cardWidth = 503;
-        const cardHeight = 621;
-        const paddingTop = 50; // Ruang untuk nama sekolah
-        const paddingBottom = 70; // Ruang untuk info guru
-        const qrSize = 250; // Ukuran QR Code
+      img.onload = () => {
+        // Ukuran untuk 8.5cm x 10.5cm @ 300 DPI
+        const cardWidth = 1003; // ≈ 8.5 cm
+        const cardHeight = 1240; // ≈ 10.5 cm
+        const paddingTop = 100;
+        const paddingBottom = 160;
+        const qrSize = 500;
 
         canvas.width = cardWidth;
         canvas.height = cardHeight;
 
-        // Gambar background sekolah (atas)
+        // Background biru (atas)
         ctx.fillStyle = "#27548a";
         ctx.fillRect(0, 0, cardWidth, paddingTop);
-        ctx.font = "bold 28px Poppins";
+
+        // Teks nama sekolah
+        ctx.font = "bold 52px Poppins";
         ctx.fillStyle = "#ffffff";
         ctx.textAlign = "center";
-        ctx.fillText("SMP Anugerah Abadi", cardWidth / 2, paddingTop - 20);
+        ctx.fillText("SMP Anugerah Abadi", cardWidth / 2, paddingTop - 30);
 
-        // Posisi QR Code di tengah kartu
+        // QR Code (tengah)
         const qrX = (cardWidth - qrSize) / 2;
         const qrY = (cardHeight - qrSize - paddingTop - paddingBottom) / 2;
         ctx.drawImage(img, qrX, qrY + paddingTop, qrSize, qrSize);
 
-        // Gambar background teks guru (bawah)
+        // Background putih (bawah)
         ctx.fillStyle = "#ffffff";
         ctx.fillRect(0, qrSize + paddingTop + qrY, cardWidth, paddingBottom);
 
-        // Border kartu guru
+        // Border kartu
         ctx.lineWidth = 8;
         ctx.strokeStyle = "#27548a";
         ctx.strokeRect(2, 2, cardWidth - 4, cardHeight - 4);
 
-        // Tambahkan nama & jabatan guru
-        ctx.font = "bold 26px Poppins";
+        // Teks nama dan jabatan
+        ctx.font = "bold 48px Poppins";
         ctx.fillStyle = "#27548a";
-        ctx.fillText(guru.nama, cardWidth / 2, qrSize + paddingTop + qrY + 40);
+        ctx.fillText(guru.nama, cardWidth / 2, qrSize + paddingTop + qrY + 60);
         ctx.fillText(
-          `- Guru Ekstrakurikuler -`,
+          "Guru SMP Anugerah Abadi",
           cardWidth / 2,
-          qrSize + paddingTop + qrY + 80
+          qrSize + paddingTop + qrY + 120
         );
 
-        // Simpan sebagai PDF agar tidak berubah ukuran di Google Docs
-        saveAsPDF(canvas.toDataURL("image/png"), guru.nama);
+        // Simpan sebagai gambar PNG
+        saveAsImage(canvas.toDataURL("image/png"), guru.nama);
       };
     } catch (err) {
       console.error("Error downloading QR code:", err);
@@ -97,15 +98,12 @@ function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
     }
   };
 
-  // Fungsi untuk menyimpan gambar sebagai PDF agar tidak berubah ukuran saat dimasukkan ke Google Docs
-  const saveAsPDF = (imageSrc, namaGuru) => {
-    const doc = new jsPDF({
-      unit: "cm",
-      format: [8.5, 10.5], // Ukuran sesuai cetak
-    });
-
-    doc.addImage(imageSrc, "PNG", 0, 0, 8.5, 10.5);
-    doc.save(`Kartu_Guru_${namaGuru}.pdf`);
+  // Fungsi menyimpan gambar
+  const saveAsImage = (dataURL, namaGuru) => {
+    const link = document.createElement("a");
+    link.download = `Kartu_Guru_${namaGuru}.png`;
+    link.href = dataURL;
+    link.click();
   };
 
   const handleLogout = () => {
@@ -134,7 +132,7 @@ function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
                 Beranda
               </Link>
             </li>
-            <li className={location.pathname === "/" ? "guru" : ""}>
+            <li className={location.pathname === "/guru" ? "active" : ""}>
               <Link to="/guru" onClick={handleNavClick}>
                 <img src={guruIcon} alt="Guru" className="sidebar-icon" />
                 Guru
@@ -263,7 +261,11 @@ function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
                 Laporan Absensi
               </Link>
             </li>
-            <li>
+            <li
+              className={
+                location.pathname.startsWith("/downloadQR") ? "active" : ""
+              }
+            >
               <Link to="/downloadQR" onClick={handleDownloadQR}>
                 <img
                   src={downloadQRIcon}
@@ -328,14 +330,18 @@ function Sidebar({ show, onClose, setIsLoggedIn, apiURL }) {
                 Jadwal Kegiatan
               </Link>
             </li>
-            <li className={location.pathname.startsWith("/") ? "active" : ""}>
+            <li
+              className={
+                location.pathname.startsWith("/riwayat-absensi") ? "active" : ""
+              }
+            >
               <Link to="/riwayat-absensi" onClick={handleNavClick}>
                 <img
-                  src={settingIcon}
+                  src={jadwalIcon}
                   alt="Laporan Absensi"
                   className="sidebar-icon"
                 />
-                Pengaturan Akun
+                Riwayat Absensi
               </Link>
             </li>
             <li

@@ -68,14 +68,6 @@ export default function TableEkstrakurikulerMobile({
             {">"}
           </button>
         </div>
-        <div className="ekstrakurikuler-export-nav-mobile">
-          <button
-            className="ekstrakurikuler-btn-export-mobile"
-            onClick={onExport}
-          >
-            <img src={excelIcon} alt="export" /> Export Excel
-          </button>
-        </div>
       </div>
     </div>
   );

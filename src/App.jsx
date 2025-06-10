@@ -28,6 +28,7 @@ import SiswaJadwal from "./pages/siswa/SiswaJadwal.jsx";
 import SiswaRiwayatAbsensi from "./pages/siswa/SiswaRiwayatAbsensi.jsx";
 import GuruPage from "./pages/admin/GuruPage.jsx";
 import UbahDataGuru from "./pages/guru/UbahDataGuru.jsx";
+import AdminDashboard from "./pages/admin/DashboardPage.jsx";
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -144,6 +145,10 @@ function App() {
                   {" "}
                   {userRole === "admin" && (
                     <>
+                      <Route
+                        path="/"
+                        element={<AdminDashboard apiURL={apiURL} />}
+                      />
                       <Route
                         path="/ekstrakurikuler"
                         element={<EkstrakurikulerPage apiURL={apiURL} />}

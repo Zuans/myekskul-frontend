@@ -133,51 +133,51 @@ export default function SiswaPage({ apiURL }) {
 
       const img = new Image();
       img.src = barcode;
-      img.onload = async () => {
-        // Ukuran final untuk kartu siswa (8.5 × 10.5 cm pada 150 DPI)
-        const cardWidth = 503;
-        const cardHeight = 621;
-        const paddingTop = 50; // Ruang untuk nama sekolah
-        const paddingBottom = 70; // Ruang untuk info siswa
-        const qrSize = 250; // Ukuran QR Code
+      img.onload = () => {
+        // Ukuran kartu 8.5 x 10.5 cm pada 300 DPI
+        const cardWidth = 1003;
+        const cardHeight = 1240;
+        const paddingTop = 100;
+        const paddingBottom = 160;
+        const qrSize = 500;
 
         canvas.width = cardWidth;
         canvas.height = cardHeight;
 
-        // Gambar background sekolah (atas)
+        // Background sekolah (atas)
         ctx.fillStyle = "#27548a";
         ctx.fillRect(0, 0, cardWidth, paddingTop);
-        ctx.font = "bold 28px Poppins";
+        ctx.font = "bold 52px Poppins";
         ctx.fillStyle = "#ffffff";
         ctx.textAlign = "center";
-        ctx.fillText("SMP Anugerah Abadi", cardWidth / 2, paddingTop - 20);
+        ctx.fillText("SMP Anugerah Abadi", cardWidth / 2, paddingTop - 30);
 
-        // Posisi QR Code di tengah kartu
+        // Posisi QR di tengah
         const qrX = (cardWidth - qrSize) / 2;
         const qrY = (cardHeight - qrSize - paddingTop - paddingBottom) / 2;
         ctx.drawImage(img, qrX, qrY + paddingTop, qrSize, qrSize);
 
-        // Gambar background teks siswa (bawah)
+        // Background bawah (untuk info siswa)
         ctx.fillStyle = "#ffffff";
         ctx.fillRect(0, qrSize + paddingTop + qrY, cardWidth, paddingBottom);
 
-        // Border kartu siswa
+        // Border luar kartu
         ctx.lineWidth = 8;
         ctx.strokeStyle = "#27548a";
         ctx.strokeRect(2, 2, cardWidth - 4, cardHeight - 4);
 
-        // Tambahkan nama & kelas siswa
-        ctx.font = "bold 26px Poppins";
+        // Teks nama dan kelas
+        ctx.font = "bold 48px Poppins";
         ctx.fillStyle = "#27548a";
-        ctx.fillText(siswa.nama, cardWidth / 2, qrSize + paddingTop + qrY + 40);
+        ctx.fillText(siswa.nama, cardWidth / 2, qrSize + paddingTop + qrY + 60);
         ctx.fillText(
           `Kelas ${siswa.kelas}`,
           cardWidth / 2,
-          qrSize + paddingTop + qrY + 80
+          qrSize + paddingTop + qrY + 120
         );
 
-        // Simpan sebagai PDF agar tidak berubah ukuran di Google Docs
-        saveAsPDF(canvas.toDataURL("image/png"), siswa.nama);
+        // Simpan sebagai gambar PNG
+        saveAsImage(canvas.toDataURL("image/png"), siswa.nama);
       };
     } catch (err) {
       console.error("Error downloading QR code:", err);
@@ -185,15 +185,12 @@ export default function SiswaPage({ apiURL }) {
     }
   };
 
-  // Fungsi untuk menyimpan gambar sebagai PDF agar tidak berubah ukuran saat dimasukkan ke Google Docs
-  const saveAsPDF = (imageSrc, namaSiswa) => {
-    const doc = new jsPDF({
-      unit: "cm",
-      format: [8.5, 10.5], // Ukuran sesuai cetak
-    });
-
-    doc.addImage(imageSrc, "PNG", 0, 0, 8.5, 10.5);
-    doc.save(`Kartu_Siswa_${namaSiswa}.pdf`);
+  // Fungsi simpan sebagai PNG
+  const saveAsImage = (dataURL, namaSiswa) => {
+    const link = document.createElement("a");
+    link.download = `Kartu_Siswa_${namaSiswa}.png`;
+    link.href = dataURL;
+    link.click();
   };
 
   const handleBlur = () => {

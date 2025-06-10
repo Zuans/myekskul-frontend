@@ -28,30 +28,47 @@ const LoginForm = ({ setIsLoggedIn, setUserRole, apiURL }) => {
       setTimeout(() => setSuccessLogout(""), 2000); // Hilangkan toast setelah 3 detik
     }
   }, [location.state]);
+  const showToast = (message, type) => {
+    const toast = document.createElement("div");
+    toast.className = type === "success" ? "toast-success" : "toast-error";
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.remove();
+    }, 2000); // Hilangkan toast setelah 3 detik
+  };
 
   const handleFormLogin = async (e) => {
     try {
       e.preventDefault();
-      console.log(apiURL);
       const response = await axios.post(`${apiURL}/api/guru/login`, {
         username,
         password,
       });
+
+      // **Cek apakah akun sudah aktif**
+      if (!response.data.isActive && response.data.role === "admin") {
+        showToast("Akun belum aktif, tunggu aktivasi oleh admin!", "error");
+        return;
+      }
+
+      // **Simpan data & navigasi setelah login sukses**
       setIsLoggedIn(true);
       setUserRole(localStorage.setItem("userRole", response.data.role));
       localStorage.setItem("isLoggedIn", true);
       localStorage.setItem("userRole", response.data.role);
       localStorage.setItem("userData", JSON.stringify(response.data));
+
+      showToast("Sukses Login!", "success");
       navigate("/", {
         state: { success: "Sukses Login", data: response.data },
       });
     } catch (error) {
-      console.log(error.data);
       const errorMessage =
-        error?.data?.error || "username atau password salah!";
-      navigate(`/login`, {
-        state: { error: errorMessage },
-      });
+        error.response?.data?.error || "Username atau password salah!";
+      showToast(errorMessage, "error");
+      navigate(`/login`, { state: { error: errorMessage } });
     }
   };
 

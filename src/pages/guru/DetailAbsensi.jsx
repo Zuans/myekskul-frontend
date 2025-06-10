@@ -69,7 +69,9 @@ export default function DetailAbsensi({ apiURL }) {
   const handleHadir = async () => {
     try {
       const filteredData = selectedData.filter((id) =>
-        pagedData.some((data) => data.id_siswa === id)
+        pagedData.some(
+          (data) => data.id_siswa === id && data.status !== "Hadir"
+        )
       );
 
       if (filteredData.length === 0) {
@@ -181,7 +183,7 @@ export default function DetailAbsensi({ apiURL }) {
                 }}
               >
                 {data.status}
-                {data.waktuScan ? ` - ${data.waktuScan} ` : ""}
+                {data.waktu_scan ? ` - ${data.waktu_scan} ` : ""}
               </td>
             </tr>
           ))}

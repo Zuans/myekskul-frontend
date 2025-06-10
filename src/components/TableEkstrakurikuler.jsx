@@ -113,11 +113,6 @@ export default function TableEkstrakurikuler({
             {">"}
           </button>
         </div>
-        <div className="ekstrakurikuler-export-nav">
-          <button className="ekstrakurikuler-btn-export" onClick={onExport}>
-            <img src={excelIcon} alt="export" /> Export Excel
-          </button>
-        </div>
       </div>
     </>
   );

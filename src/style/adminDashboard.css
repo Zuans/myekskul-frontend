@@ -1,0 +1,278 @@
+.card-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start; /* Rata kiri di desktop */
+  flex-wrap: wrap; /* Responsif */
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  background-color: #dda853;
+  color: white;
+  font-weight: bold;
+  flex-direction: row; /* Gambar, judul, dan deskripsi sebaris */
+}
+
+.card-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.card-text {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: row; /* Tetap sebaris */
+  text-align: left;
+}
+
+.card p {
+  color: white;
+}
+
+/* Responsif untuk mobile & tablet */
+@media (max-width: 768px) {
+  .card-container {
+    flex-direction: column; /* Setiap kartu di baris masing-masing */
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .card-text {
+    justify-content: center;
+  }
+}
+
+.card-img {
+  width: 24px;
+  height: 24px;
+  border-radius: 5px; /* Opsional, untuk tampilan lebih halus */
+  object-fit: cover; /* Memastikan gambar tetap terlihat proporsional */
+}
+
+.table-stat-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.table-wrapper {
+  margin-top: 3rem;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  flex: 2; /* Ekstrakurikuler lebih besar */
+}
+
+.siswa {
+  flex: 1; /* Siswa lebih kecil */
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Responsif untuk mobile dan tablet */
+@media (max-width: 768px) {
+  .table-header {
+    flex-direction: column; /* Menyusun dalam baris masing-masing */
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem; /* Memberikan sedikit jarak antar elemen */
+  }
+}
+
+.lihat-selengkapnya {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Responsif untuk tablet dan mobile */
+@media (max-width: 768px) {
+  .table-stat-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .table-wrapper {
+    width: 100%;
+  }
+}
+.table-stat-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.table-wrapper {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+}
+
+/* Perbandingan ukuran fleksibel */
+.table-ekskul-teratas {
+  flex: 2;
+}
+
+.table-ekskul-terbanyak {
+  flex: 1;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lihat-selengkapnya {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* Styling tabel */
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: left;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  padding: 10px;
+  border: none;
+}
+
+.dashboard-table th {
+  background-color: var(--primary-blue);
+  color: white;
+  font-weight: bold;
+}
+
+.dashboard-table tr:nth-child(even) {
+  background-color: #e2e2e2;
+}
+
+.dashboard-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.dashboard-table td {
+  color: #333;
+}
+
+/* Responsif untuk tablet dan mobile */
+@media (max-width: 768px) {
+  .table-stat-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.table-request-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  text-align: left;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  padding: 10px;
+  border: none;
+}
+
+.dashboard-table th {
+  background-color: var(--primary-blue);
+  color: white;
+  font-weight: bold;
+}
+
+.dashboard-table tr:nth-child(even) {
+  background-color: #e2e2e2;
+}
+
+.dashboard-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.dashboard-table td {
+  color: #333;
+}
+
+/* Tombol aksi */
+.btn-approve {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-reject {
+  background: #e53935;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Responsif untuk tablet dan mobile */
+@media (max-width: 768px) {
+  .pagination {
+    justify-content: center;
+  }
+}
