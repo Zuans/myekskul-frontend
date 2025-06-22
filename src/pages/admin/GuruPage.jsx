@@ -28,6 +28,7 @@ export default function GuruPage({ apiURL }) {
     try {
       const response = await axios.get(`${apiURL}/api/guru/getApprove`);
       setGuru(response.data);
+      console.log(response.data);
     } catch (err) {
       console.error("Error fetching data:", err);
     }
@@ -289,14 +290,14 @@ export default function GuruPage({ apiURL }) {
             </tr>
           </thead>
           <tbody>
-            {guru.length === 0 && (
+            {guruCurrentData.length === 0 && (
               <tr>
                 <td colSpan={3} style={{ textAlign: "center" }}>
                   Tidak ada data guru
                 </td>
               </tr>
             )}
-            {guru.map((guru, idx) => (
+            {guruCurrentData.map((guru, idx) => (
               <tr key={guruStartIdx + idx}>
                 <td>{guruStartIdx + idx + 1}</td>
                 <td>{guru.nama}</td>
