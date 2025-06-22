@@ -36,79 +36,68 @@ export default function DashboardPage({ apiURL }) {
     toast.className = type === "success" ? "toast-success" : "toast-error";
     toast.textContent = message;
     document.body.appendChild(toast);
-
-    setTimeout(() => {
-      toast.remove();
-    }, 3000); // Hilangkan toast setelah 3 detik
+    setTimeout(() => toast.remove(), 3000);
   };
 
   const handleApproveGuru = async (id) => {
     try {
       await axios.put(`${apiURL}/api/guru/approve/${id}`);
-
-      showToast(" Akun guru berhasil di-approve!", "success");
-
-      // Hapus dari daftar request setelah approve
+      showToast("Akun guru berhasil di-approve!", "success");
       setDashboardData((prev) => ({
         ...prev,
-        request_guru: prev.request_guru.filter((guru) => guru._id !== id),
+        request_guru:
+          prev?.request_guru?.filter((guru) => guru._id !== id) || [],
       }));
     } catch (error) {
-      showToast(" Gagal meng-approve akun guru!", "error");
+      showToast("Gagal meng-approve akun guru!", "error");
     }
   };
 
   const handleRejectGuru = async (id) => {
     try {
       await axios.delete(`${apiURL}/api/guru/reject/${id}`);
-
-      showToast(" Akun guru berhasil ditolak dan dihapus!", "success");
-
-      // Hapus dari daftar request setelah reject
+      showToast("Akun guru berhasil ditolak dan dihapus!", "success");
       setDashboardData((prev) => ({
         ...prev,
-        request_guru: prev.request_guru.filter((guru) => guru._id !== id),
+        request_guru:
+          prev?.request_guru?.filter((guru) => guru._id !== id) || [],
       }));
     } catch (error) {
-      showToast(" Gagal menolak akun guru!", "error");
+      showToast("Gagal menolak akun guru!", "error");
     }
   };
 
   const totalPage = Math.ceil(
-    (dashboardData?.request_guru || []).length / DATA_PER_PAGE
+    (dashboardData?.request_guru?.length || 0) / DATA_PER_PAGE
   );
-
-  const onPageChange = (newPage) => {
-    setPage(newPage);
-  };
+  const onPageChange = (newPage) => setPage(newPage);
 
   if (loading) return <p>Memuat data...</p>;
-  if (error) return <p>Error: {error}</p>;
+  // if (error) return <p className="error-message">{error}</p>;
 
   return (
-    <div>
+    <div className="dashboard-container">
       <h2 className="title">Dashboard</h2>
-
       <div className="card-container">
         <div className="card">
           <img src={guruIcon} alt="guru icon" className="card-img" />
           <div className="card-text">
             <h3>Jumlah Guru :</h3>
-            <p>{dashboardData.total_guru}</p>
+            <p>{dashboardData?.total_guru ?? 0}</p>
           </div>
         </div>
         <div className="card">
           <img src={siswaIcon} alt="siswa-icon" className="card-img" />
           <div className="card-text">
             <h3>Jumlah Siswa :</h3>
-            <p>{dashboardData.total_siswa}</p>
+            <p>{dashboardData?.total_siswa ?? 0}</p>
           </div>
         </div>
         <div className="card">
           <img src={ekskulIcon} alt="eksul-icon" className="card-img" />
           <div className="card-text">
             <h3>Jumlah Ekstrakurikuler :</h3>
-            <p>{dashboardData.total_ekstrakurikuler}</p>
+            <p>{dashboardData?.total_ekstrakurikuler ?? 0}</p>
           </div>
         </div>
       </div>
@@ -127,14 +116,23 @@ export default function DashboardPage({ apiURL }) {
               </tr>
             </thead>
             <tbody>
-              {dashboardData.ekstrakurikuler_persentase_kehadiran.map(
-                (item, index) => (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{item.nama}</td>
-                    <td>{item.persentase_kehadiran}%</td>
-                  </tr>
+              {dashboardData?.ekstrakurikuler_persentase_kehadiran?.length >
+              0 ? (
+                dashboardData.ekstrakurikuler_persentase_kehadiran.map(
+                  (item, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.nama}</td>
+                      <td>{item.persentase_kehadiran}%</td>
+                    </tr>
+                  )
                 )
+              ) : (
+                <tr>
+                  <td colSpan="3" className="no-data">
+                    Tidak ada data persentase kehadiran ekstrakurikuler
+                  </td>
+                </tr>
               )}
             </tbody>
           </table>
@@ -151,13 +149,23 @@ export default function DashboardPage({ apiURL }) {
               </tr>
             </thead>
             <tbody>
-              {dashboardData.ekstrakurikuler_jumlah_siswa.map((item, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{item.nama}</td>
-                  <td>{item.jumlah_siswa}</td>
+              {dashboardData?.ekstrakurikuler_jumlah_siswa?.length > 0 ? (
+                dashboardData.ekstrakurikuler_jumlah_siswa.map(
+                  (item, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.nama}</td>
+                      <td>{item.jumlah_siswa}</td>
+                    </tr>
+                  )
+                )
+              ) : (
+                <tr>
+                  <td colSpan="3" className="no-data">
+                    Tidak ada data jumlah siswa ekstrakurikuler
+                  </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
@@ -176,7 +184,7 @@ export default function DashboardPage({ apiURL }) {
             </tr>
           </thead>
           <tbody>
-            {dashboardData?.request_guru.length > 0 ? (
+            {dashboardData?.request_guru?.length > 0 ? (
               dashboardData.request_guru
                 .slice((page - 1) * DATA_PER_PAGE, page * DATA_PER_PAGE)
                 .map((request, index) => (

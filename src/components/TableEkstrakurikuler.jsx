@@ -41,44 +41,57 @@ export default function TableEkstrakurikuler({
             </tr>
           </thead>
           <tbody>
-            {currentData.map((ekskul, idx) => (
-              <tr key={ekskul.id}>
-                <td>{startIdx + idx + 1}</td>
-                <td>{ekskul.nama}</td>
-                <td>{ekskul.hari}</td>
-                <td>{ekskul.jam}</td>
-                {isAdmin && <td>{ekskul.nama_guru}</td>}
-                <td>
-                  <button
-                    className="ekstrakurikuler-btn-aksi ekstrakurikuler-btn-user"
-                    title="Kelola Siswa"
-                    onClick={() =>
-                      navigate(`/ekstrakurikuler/siswa/${ekskul._id}`)
-                    }
-                    style={{ marginRight: 8 }}
-                  >
-                    <img src={userIcon} alt="Siswa" />
-                    {ekskul.siswa_terdaftar ? ekskul.siswa_terdaftar.length : 0}
-                  </button>
-                </td>
-                <td>
-                  <button
-                    className="ekstrakurikuler-btn-aksi ekstrakurikuler-btn-edit"
-                    title="Edit"
-                    onClick={() => onEdit && onEdit(ekskul._id)}
-                  >
-                    <img src={editIcon} alt="Edit" />
-                  </button>
-                  <button
-                    className="ekstrakurikuler-btn-aksi ekstrakurikuler-btn-delete"
-                    title="Hapus"
-                    onClick={() => onDelete && onDelete(ekskul._id)}
-                  >
-                    <img src={deleteIcon} alt="Hapus" />
-                  </button>
+            {currentData.length === 0 ? (
+              <tr>
+                <td
+                  colSpan={isAdmin ? 7 : 6}
+                  style={{ textAlign: "center", padding: "1rem" }}
+                >
+                  Tidak ada data ekstrakurikuler.
                 </td>
               </tr>
-            ))}
+            ) : (
+              currentData.map((ekskul, idx) => (
+                <tr key={ekskul.id}>
+                  <td>{startIdx + idx + 1}</td>
+                  <td>{ekskul.nama}</td>
+                  <td>{ekskul.hari}</td>
+                  <td>{ekskul.jam}</td>
+                  {isAdmin && <td>{ekskul.nama_guru}</td>}
+                  <td>
+                    <button
+                      className="ekstrakurikuler-btn-aksi ekstrakurikuler-btn-user"
+                      onClick={() =>
+                        navigate(`/ekstrakurikuler/siswa/${ekskul._id}`)
+                      }
+                      title="Kelola Siswa"
+                      style={{ marginRight: 8 }}
+                    >
+                      <img src={userIcon} alt="Siswa" />
+                      {ekskul.siswa_terdaftar
+                        ? ekskul.siswa_terdaftar.length
+                        : 0}
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      className="ekstrakurikuler-btn-aksi ekstrakurikuler-btn-edit"
+                      onClick={() => onEdit && onEdit(ekskul._id)}
+                      title="Edit"
+                    >
+                      <img src={editIcon} alt="Edit" />
+                    </button>
+                    <button
+                      className="ekstrakurikuler-btn-aksi ekstrakurikuler-btn-delete"
+                      onClick={() => onDelete && onDelete(ekskul._id)}
+                      title="Hapus"
+                    >
+                      <img src={deleteIcon} alt="Hapus" />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

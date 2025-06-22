@@ -38,9 +38,30 @@
 }
 @media (max-width: 700px) {
   .search-input {
-    width: 100%;
     font-size: 0.95rem;
     max-width: 350px;
+  }
+}
+
+.search-input {
+  padding: 10px 14px 10px 38px;
+  border: 1px solid #303030;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  background: #fff;
+  color: #222;
+  max-width: 20rem;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(39, 84, 138, 0.08);
+  margin-right: 1rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 700px) {
+  .search-input {
+    margin-right: 1rem;
+    font-size: 0.95rem;
   }
 }
 
@@ -123,4 +144,64 @@
 
 .pagination-req-guru {
   margin-bottom: 3rem;
+}
+
+.guru-req-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Poppins", sans-serif;
+  border-radius: 14px;
+  overflow: hidden;
+  table-layout: fixed; /* Kolom auto menyesuaikan */
+}
+
+.guru-req-table th,
+.guru-req-table td {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  color: #303030;
+  word-wrap: break-word;
+  text-align: left;
+}
+
+.guru-req-table th {
+  background: var(--primary-blue);
+  color: #fff;
+  font-weight: 600;
+}
+
+.guru-req-table tr:nth-child(odd) td {
+  background: #fff;
+}
+.guru-req-table tr:nth-child(even) td {
+  background: #e2e2e2;
+}
+
+.guru-req-table th:first-child {
+  border-top-left-radius: 10px;
+}
+.guru-req-table th:last-child {
+  border-top-right-radius: 10px;
+}
+.guru-req-table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+.guru-req-table tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .guru-req-table th,
+  .guru-req-table td {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+
+  .guru-req-table {
+    font-size: 0.85rem;
+  }
+
+  .search-input.search-input-guru {
+    max-width: 10rem;
+  }
 }

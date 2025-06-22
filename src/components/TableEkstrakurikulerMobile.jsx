@@ -23,20 +23,28 @@ export default function TableEkstrakurikulerMobile({
           </tr>
         </thead>
         <tbody>
-          {currentData.map((ekskul) => (
-            <tr key={ekskul.id}>
-              <td>{ekskul.nama}</td>
-              <td>
-                <button
-                  className="ekstrakurikuler-btn-aksi-mobile ekstrakurikuler-btn-detail-mobile"
-                  title="Lihat Detail"
-                  onClick={() => onDetail && onDetail(ekskul._id)}
-                >
-                  <img src={detailIcon} alt="Detail" /> Detail
-                </button>
+          {currentData.length === 0 ? (
+            <tr>
+              <td colSpan={2} style={{ textAlign: "center", padding: "1rem" }}>
+                Tidak ada data ekstrakurikuler.
               </td>
             </tr>
-          ))}
+          ) : (
+            currentData.map((ekskul) => (
+              <tr key={ekskul.id}>
+                <td>{ekskul.nama}</td>
+                <td>
+                  <button
+                    className="ekstrakurikuler-btn-aksi-mobile ekstrakurikuler-btn-detail-mobile"
+                    title="Lihat Detail"
+                    onClick={() => onDetail && onDetail(ekskul._id)}
+                  >
+                    <img src={detailIcon} alt="Detail" /> Detail
+                  </button>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
       {/* Pagination */}

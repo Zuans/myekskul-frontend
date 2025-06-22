@@ -1,7 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { jsPDF } from "jspdf";
 
 import doneIcon from "../../assets/icon/done.png";
 import deleteIcon from "../../assets/icon/delete.png";
@@ -268,7 +267,7 @@ export default function GuruPage({ apiURL }) {
       <div className="search-container">
         <input
           ref={inputRef}
-          className="search-input"
+          className="search-input search-input-guru"
           type="text"
           placeholder="Cari Guru..."
         />

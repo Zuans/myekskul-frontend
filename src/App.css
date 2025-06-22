@@ -21,6 +21,11 @@ body {
   color: var(--primary-blue);
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 .app {
   display: flex;
   flex-direction: column;
@@ -45,4 +50,8 @@ a {
   .title {
     text-align: center;
   }
+}
+
+.content {
+  max-width: 100vw;
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../style/tambahEkstrakurikuler.css";
 import axios from "axios";
@@ -10,17 +10,54 @@ export default function TambahEkstrakurikuler({ apiURL }) {
   const [menit, setMenit] = useState("");
   const navigate = useNavigate();
   const { _id: id_guru } = JSON.parse(localStorage.getItem("userData"));
+  const isAdmin = localStorage.getItem("userRole") === "admin";
+  const [listGuru, setListGuru] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      if (isAdmin) {
+        const response = await axios.get(`${apiURL}/api/guru`);
+        setListGuru(response.data);
+        console.log(response.data);
+      }
+    } catch (err) {
+      console.error("Error fetching data:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const [selectedGuru, setSelectedGuru] = useState("");
+  const [searchGuru, setSearchGuru] = useState("");
+
+  // Filter dinamis berdasarkan input pencarian
+  const filteredGuru =
+    Array.isArray(listGuru) &&
+    listGuru.filter((guru) =>
+      guru.nama.toLowerCase().includes(searchGuru.toLowerCase())
+    );
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Mencegah reload halaman
 
     try {
-      const response = await axios.post(`${apiURL}/api/ekstrakurikuler`, {
-        nama,
-        hari,
-        jam: `${jam}:${menit}`, // Format waktu menjadi "HH:MM"
-        id_guru,
-      });
+      if (isAdmin) {
+        const response = await axios.post(`${apiURL}/api/ekstrakurikuler`, {
+          nama,
+          hari,
+          jam: `${jam}:${menit}`, // Format waktu menjadi "HH:MM"
+          id_guru: selectedGuru,
+        });
+      } else {
+        const response = await axios.post(`${apiURL}/api/ekstrakurikuler`, {
+          nama,
+          hari,
+          jam: `${jam}:${menit}`, // Format waktu menjadi "HH:MM"
+          id_guru,
+        });
+      }
 
       // Reset input setelah berhasil submit
       setNama("");
@@ -108,6 +145,39 @@ export default function TambahEkstrakurikuler({ apiURL }) {
             </div>
           </div>
         </div>
+        {isAdmin && (
+          <>
+            <div className="tambah-ekstrakurikuler-form-group">
+              <label htmlFor="searchGuru">Cari Guru</label>
+              <input
+                id="searchGuru"
+                type="text"
+                placeholder="Ketik nama guru"
+                value={searchGuru}
+                onChange={(e) => setSearchGuru(e.target.value)}
+              />
+            </div>
+
+            <div className="tambah-ekstrakurikuler-form-group">
+              <label htmlFor="guruSelect">Pilih Guru</label>
+              <select
+                id="guruSelect"
+                value={selectedGuru}
+                onChange={(e) => setSelectedGuru(e.target.value)}
+                required
+              >
+                <option value="" disabled>
+                  Pilih guru dari daftar
+                </option>
+                {filteredGuru.map((guru) => (
+                  <option key={guru._id} value={guru._id}>
+                    {guru.nama} ({guru.username})
+                  </option>
+                ))}
+              </select>
+            </div>
+          </>
+        )}
         <button className="tambah-ekstrakurikuler-btn-tambah" type="submit">
           Tambahkan
         </button>
